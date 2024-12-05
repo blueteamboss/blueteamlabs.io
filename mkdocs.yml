@@ -1,7 +1,7 @@
-site_name: BLUE TEAM LABS | WIKI
-repo_url: https://github.com/Blue-Team-Labs/docs
+site_name: BLUE TEAM LABS
+repo_url: https://github.com/blueteamboss/blueteamlabs.io
 theme:
-  name: material  
+  name: material
   palette:
     scheme: slate
     primary: black
@@ -10,7 +10,7 @@ theme:
     text: Arial
     code: JetBrains Mono
   logo: assets/btl_no_background.png
-  favicon: assets/favicon.
+  favicon: assets/favicon.svg
 nav:
   - index.md
   - blog/index.md
