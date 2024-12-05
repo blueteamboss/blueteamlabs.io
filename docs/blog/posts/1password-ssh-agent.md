@@ -34,8 +34,10 @@ The rest, including SSH key passwords, are stored in a password manager.
 
 Back when I had a Mac for work, the 1Password agent was actually pretty based. It allowed me too use Touch ID so I didn't even have to enter my master password often. 
 
+![alt text](../images/op-ssh-agent/op-ssh-ex.png){width=600}
+/// caption
 To demonstrate exactly how this works, I'll just SSH into my SearXNG server real quick.
-![alt text](image-1.png)
+///
 
 #### What it's doing
 Something that may cause problems, so this is important to know, is how 1Password selects the key.
