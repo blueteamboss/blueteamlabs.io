@@ -11,7 +11,7 @@ theme:
     text: Arial
     code: JetBrains Mono
   logo: assets/btl_no_background.png
-  favicon: assets/favicon.svg
+  favicon: assets/logo.png
 nav:
   - index.md
   - blog/index.md
