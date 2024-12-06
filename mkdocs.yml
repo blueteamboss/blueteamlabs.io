@@ -10,8 +10,8 @@ theme:
   font:
     text: Arial
     code: JetBrains Mono
-  logo: assets/btl_no_background.png
-  favicon: assets/logo.png
+  logo: ./assets/btl_no_background.png
+  favicon: ./assets/favicon.svg
 nav:
   - index.md
   - blog/index.md
