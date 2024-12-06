@@ -10,8 +10,8 @@ theme:
   font:
     text: Arial
     code: JetBrains Mono
-  logo: https://www.blueteamlabs.io/assets/btl_no_background.png
-  favicon: https://www.blueteamlabs.io/assets/favicon.svg
+  logo: assets/btl_no_background.png
+  favicon: assets/favicon.svg
 nav:
   - index.md
   - blog/index.md
