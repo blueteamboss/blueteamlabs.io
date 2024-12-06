@@ -1,4 +1,5 @@
 site_name: BLUE TEAM LABS
+site_url: https://blueteamlabs.io/
 repo_url: https://github.com/blueteamboss/blueteamlabs.io
 theme:
   name: material
