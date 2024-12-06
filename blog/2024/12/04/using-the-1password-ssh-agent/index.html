@@ -1,0 +1,765 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blueteamlabs.io/blog/2024/12/04/using-the-1password-ssh-agent/">
+      
+      
+        <link rel="prev" href="../../02/duo-sso-for-proxmox/">
+      
+      
+        <link rel="next" href="../../05/forwarding-idrac-logs-to-splunk-with-syslog-ng/">
+      
+      
+      <link rel="icon" href="../../../../../docs/assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Using the 1Password SSH Agent - BLUE TEAM LABS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Arial";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#using-the-1password-ssh-agent" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-header__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BLUE TEAM LABS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Using the 1Password SSH Agent
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-nav__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    BLUE TEAM LABS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to BLUE TEAM LABS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Lab Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Lab Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/network-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/virtualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-an-ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is an SSH Agent?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1password-ssh-agent" class="md-nav__link">
+    <span class="md-ellipsis">
+      1Password SSH Agent
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1Password SSH Agent">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#what-its-doing" class="md-nav__link">
+    <span class="md-ellipsis">
+      What it's doing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What it's doing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcsshsshd_configd05-authenticationconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      /etc/ssh/sshd_config.d/05-authentication.conf
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshconfig" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.ssh/config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-set-it-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to Set it Up
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="How to Set it Up">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config1passwordsshagenttoml" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.config/1Password/ssh/agent.toml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sshconfig_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      ~/.ssh/config
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Closing
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/151707434?v=4" alt="blueteamjames">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          blueteamjames
+                        
+                      </strong>
+                      <br>
+                      just a dude who likes security.
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-04 00:00:00+00:00" class="md-ellipsis">December 4, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/password-managers/">Password Managers</a>, 
+                              <a href="../../../../category/1password/">1Password</a>, 
+                              <a href="../../../../category/ssh/">SSH</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              5 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+  
+  
+
+
+<h1 id="using-the-1password-ssh-agent">Using the 1Password SSH Agent</h1>
+<p>I've been an avid user of password managers since the early days of KeePass. While I'll leave it another thoughts post to cover why I use 1Password in specific, one of my favorite features has to be 1Passwords SSH agent.</p>
+<p>Using the SSH agent takes the fear of unsecured SSH keys left on my desktop out of mind and walls them off behind the 1Password agent, requiring my master password for use. It allows for importing of specific keys, using them for Git signing, and is fairly simple to setup.</p>
+<!-- more -->
+<h2 id="what-is-an-ssh-agent">What is an SSH Agent?</h2>
+<p>It's a key-manager. Rather than having to enter a password for an SSH key every single time you use it, which could be cumbersome if you're a developer constantly pushing to Github or a systems admin constantly remoting into different servers. Agents are important so that:</p>
+<ul>
+<li>Keys aren't written to disk</li>
+<li>Keys can't be exported</li>
+</ul>
+<p>That's it. Fairly simple. They all work the same, with minor differences in behavior. </p>
+<h2 id="1password-ssh-agent">1Password SSH Agent</h2>
+<p>The 1Password SSH agent is great because rather than having to remember individual key passwords, or worse, having them all be the same, it utilizes my master password. That's right folks, I only remember about 3 passwords off the top of my head.</p>
+<ul>
+<li>One to login to my desktop</li>
+<li>One for work (which I often forget and have to reference 1Password for lol)</li>
+<li>One for 1Password</li>
+</ul>
+<p>The rest, including SSH key passwords, are stored in a password manager.</p>
+<p>Back when I had a Mac for work, the 1Password agent was actually pretty based. It allowed me too use Touch ID so I didn't even have to enter my master password often. </p>
+<figure>
+<figcaption>
+<p>To demonstrate exactly how this works, I'll just SSH into my SearXNG server real quick.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/op-ssh-agent/op-ssh-ex.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/op-ssh-agent/op-ssh-ex.png" width="600" /></a></p>
+</figure>
+<h4 id="what-its-doing">What it's doing</h4>
+<p>Something that may cause problems, so this is important to know, is how 1Password selects the key.</p>
+<p>Simple. It tries them all.</p>
+<p>Very similar too all other SSH agents.</p>
+<p>This may cause problems depending on the SSH servers configuration. I had too adjust my sshd_config to account for this. This is due to it hitting the <code>MaxAuthTries</code> limit.</p>
+<h5 id="etcsshsshd_configd05-authenticationconf"><code>/etc/ssh/sshd_config.d/05-authentication.conf</code></h5>
+<p><div class="highlight"><pre><span></span><code>PermitRootLogin no
+PasswordAuthentication no
+AuthenticationMethods publickey
+PubkeyAuthentication yes
+ChallengeResponseAuthentication yes
+KbdInteractiveAuthentication yes
+MaxAuthTries 5
+</code></pre></div>
+The value you require for <code>MaxAuthTries</code> is dependent on how many keys you're using with the agent. For instance, if you're importing all of your keys, you'll need a higher limit.</p>
+<p>In other situations, you may want to match this based on the public key. This can be configured by setting the <code>IdentityFile</code> for the host in you <code>~/.ssh/config</code> file to the file pointing to the public key.</p>
+<p>For instance, here's how I have mine set for GitHub</p>
+<h5 id="sshconfig"><code>~/.ssh/config</code></h5>
+<div class="highlight"><pre><span></span><code>Host github.com
+    User git
+    IdentityFile ~/.ssh/github_id_ed25519.pub
+    IdentitiesOnly yes
+</code></pre></div>
+<h2 id="how-to-set-it-up">How to Set it Up</h2>
+<p>Setting it up is fairly simple. As long as you have 1Password installed, getting the agent setup is a breeze.</p>
+<figure>
+<figcaption>
+<p>In the 1Password desktop app, click the account name in the top left hand corner and go to <strong>"Settings"</strong></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/op-ssh-agent/op-step-1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/op-ssh-agent/op-step-1.png" width="400" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>Next, go to <strong>"Developer"</strong>, scroll to the <strong>"SSH Agent"</strong> section and check the box for <strong>"Use the SSH Agent"</strong>. Optionally set any of the advanced settings to your liking.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/op-ssh-agent/op-step-2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/op-ssh-agent/op-step-2.png" width="400" /></a></p>
+</figure>
+<p>Next, you'll need to create a file called in your 1Password config directory called <code>agent.toml</code>. On Linux this is in <code>~/.config/1Password/ssh/agent.toml</code></p>
+<p>In the agent.toml file, you'll tell 1Password which keys it can use. These keys must already be uploaded to your 1Password vault. </p>
+<p>The format is pretty simple</p>
+<p>You tell it a key by the delimiter <code>[[ssh-keys]]</code> followed by <code>item</code> which is the name or unique ID of the item in 1Password, <code>vault</code> which is the vault name that it's stored in, and <code>account</code> which is the account name it's stored in; useful if you use a work and personal 1Password accouont on the same device.</p>
+<p>Here's an excerpt from mine to demonstrate that.</p>
+<h5 id="config1passwordsshagenttoml"><code>~/.config/1Password/ssh/agent.toml</code></h5>
+<div class="highlight"><pre><span></span><code>[[ssh-keys]]
+item = &quot;Homelab SSH User Key&quot;
+vault = &quot;BTL Cryptography&quot;
+account = &quot;BLUE TEAM&quot;
+
+[[ssh-keys]]
+item = &quot;Github BTL SSH Key&quot;
+vault = &quot;BTL Cryptography&quot;
+account = &quot;BLUE TEAM&quot;
+</code></pre></div>
+<p>After you've done that, you'll need to modify your SSH config to tell it to use the 1Password agent. This is fairly simple. You can do this blanket, or staged if you need to. </p>
+<p>To do this, just set <code>IdentityAgent ~/.1password/agent.sock</code> in the config file under the hosts you want to use the SSH agent. You can combine it with the public key file if you need to get around the <code>MaxAuthTries</code> we mentioned earlier, and maybe the <code>User</code> if the remote username is different than the one you're logged in as.</p>
+<h5 id="sshconfig_1"><code>~/.ssh/config</code></h5>
+<div class="highlight"><pre><span></span><code>Host *
+    IdentityAgent ~/.1password/agent.sock
+
+Host github.com
+    User git
+    IdentityFile ~/.ssh/github_id_ed25519.pub
+    IdentitiesOnly yes
+</code></pre></div>
+<p>Next, go ahead and try to SSH into something. You should get the 1Password prompt. If not, you did something wrong or something is unique on your system that needs to be modified. If you're on Windows, sorry you'll have to find the instructions on your own. I do have it setup on Windows but don't feel like digging that up for y'all.</p>
+<h2 id="closing">Closing</h2>
+<p>SSH Agents are a lifesaver, and even better are ones that completely remove even the encrypted private key from disk. If you're a power user or developer and have a 1Password account, go ahead and get started with the 1Password Agent. You'll thank yourself for it 1-million times over.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

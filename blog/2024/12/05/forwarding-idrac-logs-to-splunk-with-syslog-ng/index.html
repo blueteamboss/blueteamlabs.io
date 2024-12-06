@@ -1,0 +1,925 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blueteamlabs.io/blog/2024/12/05/forwarding-idrac-logs-to-splunk-with-syslog-ng/">
+      
+      
+        <link rel="prev" href="../../04/using-the-1password-ssh-agent/">
+      
+      
+        <link rel="next" href="../../06/signing-git-commits-with-1password-ssh-agent/">
+      
+      
+      <link rel="icon" href="../../../../../docs/assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Forwarding iDRAC Logs to Splunk with syslog-ng - BLUE TEAM LABS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Arial";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#forwarding-idrac-logs-to-splunk-with-syslog-ng" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-header__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BLUE TEAM LABS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Forwarding iDRAC Logs to Splunk with syslog-ng
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-nav__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    BLUE TEAM LABS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to BLUE TEAM LABS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Lab Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Lab Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/network-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/virtualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-idrac" class="md-nav__link">
+    <span class="md-ellipsis">
+      What is iDRAC?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-syslog-ng" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up syslog-ng
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up syslog-ng">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#etcsyslog-ngconfd05-syslog-idracconf" class="md-nav__link">
+    <span class="md-ellipsis">
+      /etc/syslog-ng/conf.d/05-syslog-idrac.conf
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-idrac-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring iDRAC Settings
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuring iDRAC Settings">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-syslog-server-on-idrac" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting Syslog Server on iDRAC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-idrac-system-log-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring iDRAC System Log Types
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verify-log-ingest" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verify Log Ingest
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Verify Log Ingest">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validating-traffic-is-reaching-the-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validating Traffic is Reaching the Server
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#checking-if-the-logs-are-written" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking if the logs are Written
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuring-splunk-forwarder" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Splunk Forwarder
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#verifying-logs-in-splunk" class="md-nav__link">
+    <span class="md-ellipsis">
+      Verifying Logs in Splunk
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/151707434?v=4" alt="blueteamjames">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          blueteamjames
+                        
+                      </strong>
+                      <br>
+                      just a dude who likes security.
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-12-05 00:00:00+00:00" class="md-ellipsis">December 5, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/splunk/">Splunk</a>, 
+                              <a href="../../../../category/log-management/">Log Management</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              11 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+  
+  
+
+
+<h1 id="forwarding-idrac-logs-to-splunk-with-syslog-ng">Forwarding iDRAC Logs to Splunk with syslog-ng</h1>
+<p>I'm a firm believer in centralized logging of everything. If it supports sending some sort of log stream to a remote location, it should be getting sent there. In my case, my lab utilizes Splunk through the developer license.</p>
+<p>As of today, all of my logs for Windows, Linux, Firewalls, Duo, and a few other random things are in Splunk. </p>
+<p>I actually realized I wasn't forwarding the logs when I went to update my iDRAC controller and BIOS firmware. It's been a while since I did that, so while I was in there I was validating all my other settings were as expected and realized syslog was not configured.</p>
+<!-- more -->
+
+<h2 id="what-is-idrac">What is iDRAC?</h2>
+<p>I would assume most would know this, but perhaps theres some out there who haven't had the opportunity to play with Enterprise hardware. iDRAC stands for Integrated Dell Remote Access Controller. It's a hardware device that allows you remote access to the serve for managing it anywhere on the network you so desire.</p>
+<p>With iDRAC you can:</p>
+<ul>
+<li>Access a virtual console for interacting with the OS</li>
+<li>Manage BIOS settings and configurations remotely</li>
+<li>Monitor general hardware and disk health</li>
+<li>Control power and thermal profiles</li>
+<li>Remotely update iDRAC and BIOS firmware</li>
+<li>Many other things not listed</li>
+</ul>
+<p>iDRAC is a web-based application with components that use Java, VNC, and other app frameworks for things like the remote virtual console.</p>
+<h2 id="setting-up-syslog-ng">Setting up syslog-ng</h2>
+<p>My Splunk setup consists of one search head and one forwarder. My forwarder operates on a dedicated machine given the name <code>syslog.core.blueteamlabs.io</code>. Rather than utilizing Splunk for managing the inputs for syslog itself, I utilize syslog-ng. </p>
+<p>This is really a preference, and it also gives me the ability to ensure that even if I need to take the main search head offline, logs are still stored somewhere in the meantime and are forwarded once its back online. It also enables me to use Ansible for managing the configurations, which is my preference.</p>
+<p>While updating my iDRAC and BIOS firmware, I logged into my syslog server and created a new configuration for iDRAC logs.</p>
+<h5 id="etcsyslog-ngconfd05-syslog-idracconf"><code>/etc/syslog-ng/conf.d/05-syslog-idrac.conf</code></h5>
+<p><div class="highlight"><pre><span></span><code>source s_udp2514 {
+    network(
+        transport(&quot;udp&quot;)
+        port(2514)
+        flags(no-parse)
+    );
+};
+
+# Destinations for UDP Sources
+destination d_udp2514 { file(&quot;/syslog/udp2514.log&quot; template(&quot;${ISODATE} ${HOST} ${MSG}\n&quot;)); };
+
+# Map Sources to Destinations
+log { source(s_udp2514); destination(d_udp2514); };
+</code></pre></div>
+What we're doing in this file is setting up our input source. This is defined in the <code>source s_udp2514</code> section. We're setting the transport to <code>udp</code>, as I have yet to go through the motions of configuring encrypting TCP syslog. For the port, we're selecting the port <code>2514</code>. Under the flags, we're telling it not to pre-parse the logs. This prevents syslog-ng from applying any parsers that might interfere with Splunk.</p>
+<p>Whether you use UDP or TCP depends on what the source application supports and what you have setup. I would recommend setting up encrypted syslog, but I'm a bit hyprocritical here as even I haven't set that up yet. One thing at a time.</p>
+<p>Under the destinatiosn section, defined by <code>destination d_udp2514</code> we're pointing it to an file at <code>/syslog/udp2514.log</code> which is a directory my Splunk service account has read access to. When it ingests a message, it'll write the message to a newline, as defined in the <code>template</code> section.</p>
+<p>Through the message template, we're appending the ISO timestamp for when the log was received and the source host that sent the message. I originally did not include this until after reviewing the log entries in Splunk and noticing there was no way to attribute source to the logs, which could be problematic.</p>
+<p>This is done by <code>{$ISODATE}</code> and <code>${HOST}</code> in <code>...template("${ISODATE} ${HOST} ${MSG}\n")); };</code></p>
+<p>Lastly, we're mapping the input to the output file in the <code>log</code> section. This just ties the two together so syslog-ng knows where to write the logs.</p>
+<p>After setting up syslog-ng, we'll go ahead and restart it
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
+sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>syslog-ng
+</code></pre></div>
+After restarting, we'll just verify that the port is bound. This can just be done with <code>netstat</code>.
+<div class="highlight"><pre><span></span><code>netstat<span class="w"> </span>-oan<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="m">2514</span>
+</code></pre></div></p>
+<figure>
+<figcaption>
+<p>From the output of netstat, we can see that <code>udp/2514</code> is bound and should be able to receive traffic now. I don't use the term "listening" as UDP is connectionless so "bound" or "open" is a more appropriate term. </p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/netstat-output.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of netstat output" src="../../../../images/idrac-syslog/netstat-output.png" width="600" /></a></p>
+</figure>
+<h2 id="configuring-idrac-settings">Configuring iDRAC Settings</h2>
+<p>To setup iDRAC for remote syslog, we'll have to do two things:</p>
+<ol>
+<li>Configure the remote syslog server</li>
+<li>Configure the alert and event types to be logged</li>
+</ol>
+<h3 id="setting-syslog-server-on-idrac">Setting Syslog Server on iDRAC</h3>
+<figure>
+<figcaption>
+<p>iDRAC settings can be configured by going to <strong>"Server"</strong> --&gt; <strong>"Logs"</strong> --&gt; <strong>"Settings"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/idrac-step-01.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of iDRAC Syslog Settings" src="../../../../images/idrac-syslog/idrac-step-01.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>Next, we'll set our syslog server settings. First, check <strong>"Remote Syslog Enabled"</strong>, then set the "Syslog Server1" to your syslog server, in my instance <code>syslog.core.blueteamlabs.io</code>. </p>
+<p>Third, we'll set the <strong>"Port Number"</strong> to the one we configured on syslog-ng, <code>2514</code>. Last, we'll click <strong>"Apply"</strong></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/idrac-step-02.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of iDRAC Syslog Settings" src="../../../../images/idrac-syslog/idrac-step-02.png" width="600" /></a></p>
+</figure>
+<h3 id="configuring-idrac-system-log-types">Configuring iDRAC System Log Types</h3>
+<figure>
+<figcaption>
+<p>To configure this, we'll head over to the <strong>"Server"</strong> --&gt; <strong>"Alerts"</strong> page. Here we'll be modifying the enabling Alerts and managing settings under the <strong>"Alerts and Remote System Log Confgiguration"</strong> settings</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/idrac-step-03.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of iDRAC Alerts Configuration Page" src="../../../../images/idrac-syslog/idrac-step-03.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>At the to of the page, if Alerts are not already enabled, go ahead and toggle that to "Enabled" and click Apply. </p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/idrac-step-04-1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of iDRAC Alerts Configuration Page" src="../../../../images/idrac-syslog/idrac-step-04-1.png" width="600" /></a></p>
+</figure>
+<p>Under the <strong>"Alerts and Remote System Log Configuration"</strong>, there are hundreds of event types and alerts we can configure. To simplify things, we'll just start by sending them all to our remote syslog server. </p>
+<figure>
+<figcaption>
+<p>To do this, we'll just click the checkbox in the header row for <strong>"Remote System Log"</strong> and click <strong>"Apply"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/idrac-step-04.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of iDRAC Alerts configuration Page" src="../../../../images/idrac-syslog/idrac-step-04.png" width="600" /></a></p>
+</figure>
+<details class="danger" open="open">
+<summary>Do this on EVERY Page</summary>
+<p><strong>You'll want to paginate through all the pages using the arrow buttons next to the apply button. Dell is perhaps the actual worst at UX/UI design and when you select all, it only selects all visible.</strong></p>
+</details>
+<details class="note">
+<summary>Log Verbosity</summary>
+<p>How verbose you want to go depends on what you're using the logs for. If you're using the for operational data, it might be helpful to have power utilization and detailed hardware logs. If you're only using them for security, you may want to limit it to audit and login events.</p>
+<p>I'm starting with everything and may pull things back if it's not useful.</p>
+</details>
+<h2 id="verify-log-ingest">Verify Log Ingest</h2>
+<p>There's a coupt of methods we can use to verify log input. In my instance I want to verify two things:</p>
+<ol>
+<li>The traffic is reaching the server over <code>udp/2514</code></li>
+<li>Syslog-ng is logging the traffic to <code>/syslog/udp2514.log</code></li>
+</ol>
+<h3 id="validating-traffic-is-reaching-the-server">Validating Traffic is Reaching the Server</h3>
+<p>For this, we'll just run a quick <code>tcpdump</code> on the server. I know you're probably thinking <em>"tcpdump? I thought this was UDP?"</em> Well, tcpdump is just the name of the tool. Its fully capable of dumping all traffic regardless of protocol.</p>
+<p>To do so we'll use the following command
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>tcpdump<span class="w"> </span>udp<span class="w"> </span>port<span class="w"> </span><span class="m">2514</span>
+</code></pre></div>
+This just filters only traffic on UDP port <code>2514</code> as we don't want to fill our shell buffer with a ton of uninteresting traffic that we have to sift through.</p>
+<p>What we want to do next is trigger an event that would send that data to the syslog server. We can test using the "Test Event" or we can manually do something that would trigger it. For me, I tested a few of the IDs I was able to find with a quick google search but wasn't able to get it working.</p>
+<p>Instead, I just went over to the "Virtual Console" page and hit apply. This sent a few messages over to the syslog server.</p>
+<figure>
+<figcaption>
+<p>As we can see, we are receiving the logs on the syslog server. Next, we'll just need to check the logfile.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/tcpdump.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of tcpdump output" src="../../../../images/idrac-syslog/tcpdump.png" width="600" /></a></p>
+</figure>
+<h3 id="checking-if-the-logs-are-written">Checking if the logs are Written</h3>
+<p>The next thing we'll do is check to see if the logs are written to <code>/syslog/udp2514.log</code></p>
+<figure>
+<figcaption>
+<p>By running <code>tail -f /syslog/udp2514.log</code> we can see that theres something wrong. The file doesn't exist, which means that somethings wrong with the ingest for syslog-ng.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/tail-fail.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of tail output" src="../../../../images/idrac-syslog/tail-fail.png" width="600" /></a></p>
+</figure>
+<p>I do run uncomplicated firewall installed (UFW) on all my machines and filter all traffic except that which I have validated is required. I suspect this is getting dropped by UFW. To verify this we'll check the UFW logs.</p>
+<figure>
+<figcaption>
+<p>To check the UFW logs, we'll check the journal log. This can be done with <code>journalctl -xe | grep UFW</code></p>
+<p>As we can see from these logs, we are blocking that traffic. </p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/ufw-logs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of UFW Logs" src="../../../../images/idrac-syslog/ufw-logs.png" width="600" /></a></p>
+</figure>
+<p>To add this too UFW, we'll just add the followingg rule:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>ufw<span class="w"> </span>allow<span class="w"> </span>from<span class="w"> </span>any<span class="w"> </span>proto<span class="w"> </span>udp<span class="w"> </span>to<span class="w"> </span>any<span class="w"> </span>port<span class="w"> </span><span class="m">2514</span>
+</code></pre></div></p>
+<p>This just allows inbound traffic on <code>udp/2514</code> from any address. I don't get specific on UFW, just use it for managing attack service of accessible services on the local network.</p>
+<p>Next, we'll go back and generate some syslog alerts from iDRAC again by just modifying the power configuration to "Not redundant". I would recommend waiting too run the <code>tail</code> command until after you've generated the traffic, because it will be created on first write.</p>
+<figure>
+<figcaption>
+<p>After running <code>tail -f /syslog/udp2514.log</code> again, we're seeing the logs written to disk. The next thing we'll need to do is configure the Splunk forwarder to send them.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/syslog-logging-to-file.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot output of tail command" src="../../../../images/idrac-syslog/syslog-logging-to-file.png" width="600" /></a></p>
+</figure>
+<details class="warning" open="open">
+<summary>Log Format</summary>
+<p>What we're actually seeing here bodes well for when we create ingest actions. Things appear to be delimited in a common way that we can atleast get into a searchable index. It might not be as verbose as we would like, but it'll do.</p>
+</details>
+<h2 id="configuring-splunk-forwarder">Configuring Splunk Forwarder</h2>
+<p>To configure the Splunk forwarder, we'll want to</p>
+<ol>
+<li>Create the new index on our Splunk Server</li>
+<li>Modify the <code>/opt/splunkforwarder/etc/system/local/inputs.conf</code> file to read the log file from syslog-ng.</li>
+</ol>
+<details class="note">
+<summary>Splunk Deployment Server</summary>
+<p>You can also do some of this from the Splunk Deployment Server. I haven't got around to setting that up in the lab, and I would assume most non-enterprise users haven't either. I rely heavily on Ansible for everything in my environment, so I often don't mess with specific things like this which I can accomplish via Ansible just as easily.</p>
+</details>
+<figure>
+<figcaption>
+<p>To create the index, log into Splunk and go to <strong>"Settings"</strong> --&gt; <strong>"Indexes"</strong></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/splunk-index-01.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Splunk Settings dialog screenshot" src="../../../../images/idrac-syslog/splunk-index-01.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>Click the button <strong>"New Index"</strong></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/splunk-index-02.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Splunk settings dialog screenshoto" src="../../../../images/idrac-syslog/splunk-index-02.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>In the pop-up, enter your <strong>"Index Name"</strong>, in my instance <code>btl_idrac_logs</code>. Ensure that the <strong>"Index Data Type"</strong> is set to <strong>"Events"</strong>. You can optionally change any of the other settings to fit your needs, but the defaults are fine for me right now. </p>
+<p>Lastly, click <strong>"Save"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/splunk-index-03.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Splunk index dialog" src="../../../../images/idrac-syslog/splunk-index-03.png" width="600" /></a></p>
+</figure>
+<p>With that done, heave back on over too the Splunk forwarder. For this process I think it's best that we impersonate the <code>splunkfwd</code> user as this is what the Splunk forwarder service runs under.</p>
+<p>To do so, just type
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>su<span class="w"> </span>-<span class="w"> </span>splunkfwd
+</code></pre></div></p>
+<figure>
+<figcaption>
+<p>Once you see <code>splunkfwd@&lt;hostname&gt;</code> you're acting as the <code>splunkfwd</code> user and can continue on. You could do this as <code>root</code> or through <code>sudo</code>, but it might cause issues with permissions, so impersonating is the best bet.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/impersonate-splunkfwd.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/idrac-syslog/impersonate-splunkfwd.png" /></a></p>
+</figure>
+<p>Next, we'll need modify the <code>/opt/splunkforwarder/etc/system/local/inputs.conf</code>. You can use your text editor of choice. To keep it accessible, I'll just use nano since not everyone knows how to exit <code>vi</code> in 2024 because they apparently have better things to do.</p>
+<div class="highlight"><pre><span></span><code>nano<span class="w"> </span>etc/system/local/inputs.conf
+</code></pre></div>
+<p>At the top of your file, add a new section for the log file we are writing with syslog-ng. Here is what mine will look like.
+<div class="highlight"><pre><span></span><code>[monitor:///syslog/udp2514.log]
+sourcetype = dell:log
+index = btl_idrac_logs
+</code></pre></div>
+When we set this, we're telling it to monitor for <code>/syslog/udp2514.log</code> file entries, via the <code>[[monitor://]]</code> section. We're then telling Splunk to index these in <code>btl_idrac_logs</code> via the <code>index</code> key. To aid in finding the logs, we're also telling it to set the sourcetype as <code>dell:log</code> via the <code>sourcetype</code> key. </p>
+<p>Save the file using <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-x">X</kbd></span> and hit <span class="keys"><kbd class="key-y">Y</kbd></span> when it asks you to save. Lastly, hit <span class="keys"><kbd class="key-enter">Enter</kbd></span> to confirm and close the file.</p>
+<p>Next, we'll need too restart the <code>splunkd</code> daemon. To do this just run 
+<code>bin/splunk restart</code></p>
+<figure>
+<figcaption>
+<p>It'll ask you for a <code>sudo</code> password a few times, and restart when complete. Your logs should now be getting sent to your Splunk server.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/splund-restart.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot from restarting splunkd" src="../../../../images/idrac-syslog/splund-restart.png" width="600" /></a></p>
+</figure>
+<h2 id="verifying-logs-in-splunk">Verifying Logs in Splunk</h2>
+<p>Lastly, we'll verify our logs are actually being indexed. We won't cover creating any ingest actions or extractions in this post, I'll save that for another more complex one with a greater learning opporitunity. </p>
+<details class="warning" open="open">
+<summary>Generate Logs</summary>
+<p>What you'll want to do next is go generate some events in your iDRAC controller as Splunk won't ingest whatever exists when you add it to the monitor. You'll need some new events for it to pull in.</p>
+</details>
+<figure>
+<figcaption>
+<p>Login to your Splunk search head and go to <strong>"Search and Reporting"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/search-and-reporting.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Splunk apps" src="../../../../images/idrac-syslog/search-and-reporting.png" width="500" /></a></p>
+</figure>
+<p>In the search bar, enter the query <code>index="btl_idrac_logs" sourcetype="dell:log"</code>. Obviously change the index name if you selected something different.</p>
+<figure>
+<figcaption>
+<p>If all goes well, you should see some logs in there. You'll see the colon-delimited fields aren't indexed indivudally. You'll have to create extractions for that, but I won't cover that in this post as it's already long enough and it's easy to ask ChatJipitee. </p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/idrac-syslog/splunk-results.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Splunk search results" src="../../../../images/idrac-syslog/splunk-results.png" width="600" /></a></p>
+</figure>
+<details class="success" open="open">
+<summary>Congrats!</summary>
+<p>Congrats, you just ingested more logs in your hunt to become the next large surveillance provider. You're making our frenemies over at the NSA, NRO, DIA, and CIA very happy! </p>
+</details>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

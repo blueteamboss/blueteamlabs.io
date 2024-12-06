@@ -1,0 +1,937 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blueteamlabs.io/blog/2024/11/20/lab-update---off-with-vmware/">
+      
+      
+      
+        <link rel="next" href="../../29/creating-custom-app-ids---proxmox/">
+      
+      
+      <link rel="icon" href="../../../../../docs/assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Lab Update - Off with VMware - BLUE TEAM LABS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Arial";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#lab-update-off-with-vmware" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-header__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BLUE TEAM LABS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Lab Update - Off with VMware
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-nav__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    BLUE TEAM LABS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to BLUE TEAM LABS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Lab Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Lab Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/network-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/virtualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      What Changed?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-alternatives" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Alternatives
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="The Alternatives">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ruling-things-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ruling Things Out
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Ruling Things Out">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hyper-v" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hyper-V
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#xcp-ng" class="md-nav__link">
+    <span class="md-ellipsis">
+      XCP-ng
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#azure-local" class="md-nav__link">
+    <span class="md-ellipsis">
+      Azure Local
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#landing-on-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Landing on Proxmox
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Landing on Proxmox">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ludus-our-cyber-lord-and-savior" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ludus, our cyber-lord and savior.
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#built-on-debian" class="md-nav__link">
+    <span class="md-ellipsis">
+      Built on Debian
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-post-mortem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Post Mortem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration Post Mortem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#migration-times" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration Times
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#networking-pains" class="md-nav__link">
+    <span class="md-ellipsis">
+      Networking Pains
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-import-process" class="md-nav__link">
+    <span class="md-ellipsis">
+      The import Process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#id-like-to-see" class="md-nav__link">
+    <span class="md-ellipsis">
+      I'd like to see:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overall-thoughts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overall Thoughts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/151707434?v=4" alt="blueteamjames">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          blueteamjames
+                        
+                      </strong>
+                      <br>
+                      just a dude who likes security.
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-11-20 00:00:00+00:00" class="md-ellipsis">November 20, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/lab-updates/">Lab Updates</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              11 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+  
+  
+
+
+<h1 id="lab-update-off-with-vmware">Lab Update - Off with VMware</h1>
+<p>The Broadcom takeover of VMware saga continues. This time, changes to licensing for VMware User Group (VMUG) Advantage members.</p>
+<p>For years, I've been using VMUG Advantage to handle my lab licensing. It's a yearly membership that <strong>granted</strong> you access to "EvalExperience" licenses for the full suite of VMware products that were good for 365 days.</p>
+<p>VMUG also provides some additional benefits like discounts on exams, free training, user conferences, and more. For me though, the licensing was the main driver of my membership.</p>
+<p>Despite constant reassurance from the VMUG and VMware leadership that nothing would change for us, our license experience has completely changed.</p>
+<!-- more -->
+<h2 id="what-changed">What Changed?</h2>
+<p>Gatekeeping of Eval Licensing. That's the best I can explain it.</p>
+<p>On Nov 5, VMUG members received notice that VMware was changing the way Eval licensing was provided. This change was abrupt, one which we were assured would not occur, and a continuation of the cannibalistic behavior of Broadcom in their quest to maximize profit over at VMware after the acquisition.</p>
+<p>In short, EvalExperience licenses are no longer a thing. Rather, you now need to get certified to get access to VMware licenses for personal use.</p>
+<figure>
+<figcaption>
+<p>VMUG Advantage membership email with details of licensing changes.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/vmware-migration/image-1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/vmware-migration/image-1.png" width="600" /></a></p>
+</figure>
+<p>With the change, we learned:</p>
+<ul>
+<li>If we needed to request any licenses, we would have to do so prior to Nov 30, which would be valid for 365 days.</li>
+<li>We could only download existing licenses and software prior to December 1.</li>
+<li>No details of how this new certification program works.</li>
+</ul>
+<p>I just want to vent for one damn minute. I understand this is a venture in expanding the profitability of VMware. Certifications bring in money, but how on God's green earth are new users supposed to learn the product and become confident enough to administer and get certified in the software if they can't even get access to eval licenses that are valid for longer than a few weeks? It fails basic logic tests, but we rejoice in the only responsibility executives have being to their shareholders. Lobotomize the customer base, push everyone who's loved the product away—as long as our profit margins are increased—who gives a damn?</p>
+<h2 id="the-alternatives">The Alternatives</h2>
+<p>I'm not going to pretend I didn't anticipate this. I've been anticipating this since the moment the acquisition went through. Broadcom has a long history of doing everything possible to make the customer experience worse on their path to maximize profit.</p>
+<p>Thankfully, I've been researching and evaluating alternatives for the last 3-4 months. Even though we were assured this would not change, and some made renewal or purchasing decisions based on this commitment, I knew deep down it was only a matter of time.</p>
+<p>The main alternatives I've been looking at are:
+* Proxmox Virtual Environment
+* XCP-ng
+* Hyper-V
+* Azure Local</p>
+<h3 id="ruling-things-out">Ruling Things Out</h3>
+<h5 id="hyper-v">Hyper-V</h5>
+<p>I've used Hyper-V in the past, and if I'm quite honest I want nothing to do with Windows or Microsoft. Hyper-V has some basic feature sets you'd expect from a hypervisor and does have a decent management interface. </p>
+<p>One of the biggest problems for me was Microsoft discontinuing Hyper-V standalone server. I do not want my hypervisor to have to run a full-blown Windows environment (even if it's only Server Core). </p>
+<p>Windows is a security nightmare, and I do not want to have to manage migration, high availability, and rebooting servers monthly (or more). I need these things to be resilient, sparingly need rebooting, and be minimal from the start. Hyper-V on Windows is not that.</p>
+<p><strong><em>On top of security, Microsoft is quickly becoming the most privacy-invasive company to ever exist.</em></strong></p>
+<p>They've continued to add telemetry which can never fully be blocked or ripped out of their software, locked functionality behind cloud connectivity requirements, and are most certainly best friends with three-letter agencies.</p>
+<h5 id="xcp-ng">XCP-ng</h5>
+<p><a href="https://xcp-ng.org/">XCP-ng</a> is built on the Xen hypervisor. Of the ones I elected not to use, this was the one I kept coming back to and thinking "maybe I should try it out." </p>
+<p>To be completely honest, there wasn't a whole lot to dislike with it. It met all of my requirements, had a centralized management interface, and is built on proven tech. </p>
+<p><strong><em>Just one glaring issue. I've never used it before.</em></strong></p>
+<p>Coming from VMware which I've used since the earliest days of my professional career, I want something that's familiar or that I've at least worked with extensively.</p>
+<p>Of course, I'm always for learning, but this lab also hosts critical home services like personal file storage for myself and family, ISOs of course, GitLab, ad-blocking, SSO, and more. I try to keep these things as available as possible, and I probably have better uptime than most small-medium enterprises. </p>
+<p>Not entirely difficult when I'm not supporting thousands of users, but still something I always find entertaining.
+<em>Companies spend all this money for high availability and scalability but end up having more downtime and performance issues than if they just went with a single instance armed to the teeth with sufficient resources.</em></p>
+<h5 id="azure-local">Azure Local</h5>
+<p>This is actually the one I'm most interested in. I love the idea of having self-hosted bare-metal that integrates tightly with public cloud features. </p>
+<p>For those who don't know, <a href="https://azure.microsoft.com/en-us/products/local/">Azure Local</a> is basically a way of bridging the gap and allowing you to have hybrid-cloud resources in your Microsoft Azure tenant. This significantly reduces the cost you would pay for running VMs in Azure and integrates neatly with a wide array of features, including Azure Kubernetes Service (AKS). </p>
+<p>While I've consciously elected to avoid cloud resources and SaaS applications for the homelab, I would love to get more experience with Azure Local. The Systems Engineering team at work is currently doing a proof-of-value in it, as they also look to move away from VMware.</p>
+<p><strong><em>P.S. this used to be called "Azure Stack."</em></strong></p>
+<p>Three issues resulted in me not giving this one the light of day:</p>
+<ul>
+<li>Cost<ul>
+<li>$10/Physical Core per month...</li>
+<li>I have 44 physical cores. That's $440/month...</li>
+<li>It is $0/Physical core for Azure Hybrid, but I don't think I could qualify for that benefit.</li>
+</ul>
+</li>
+<li>Requirements that all hardware (storage, networking, CPU, RAM) are identical. <ul>
+<li>I've got a hodgepodge of equipment for my lab.</li>
+</ul>
+</li>
+<li>The cloud. <ul>
+<li>I can't stand it for handling my personal data.</li>
+</ul>
+</li>
+</ul>
+<h3 id="landing-on-proxmox">Landing on Proxmox</h3>
+<p>Proxmox is the only other hypervisor besides Hyper-V and VMware that I've used extensively. I used it all the way back before I realized VMUG EvalExperience was a thing about 3 years ago. </p>
+<p>Proxmox is everything you could ask for in a hypervisor, supporting nearly identical feature sets to VMware. </p>
+<p>While I won't be able to afford a subscription, which is a shame because I would love to support the product, I can still get updates and packages through their non-production repo. This is fine, after all, this is a homelab.</p>
+<h5 id="ludus-our-cyber-lord-and-savior">Ludus, our cyber-lord and savior.</h5>
+<p>There's also one other benefit that I haven't discussed yet. For the lab, I use something called <a href="https://gitlab.com/badsectorlabs/ludus">Ludus</a>. </p>
+<p>Ludus is a really awesome platform for quickly spinning up and shutting down cyber-ranges. Previously it was maintained by CISA, but has since been forked and maintained by Bad Sector Labs. CISA has archived their official Github repo for it.</p>
+<p>Ludus itself utilizes Proxmox. Ludus can be installed in one of a few ways:</p>
+<ul>
+<li><a href="https://docs.ludus.cloud/docs/deployment-options/bare-metal">In a nested Debian 12 VM</a><ul>
+<li>This is what I've been using</li>
+<li>Performance is sub-optimal when working with large labs</li>
+<li>Nested virtualization is a pain</li>
+</ul>
+</li>
+<li><a href="https://docs.ludus.cloud/docs/deployment-options/bare-metal">On bare-metal as a Debian 12 Machine</a><ul>
+<li>It ends up running Proxmox anyway</li>
+</ul>
+</li>
+<li><a href="https://docs.ludus.cloud/docs/deployment-options/proxmox">On an existing Proxmox instance</a></li>
+</ul>
+<p>For me, I prefer running it on my existing Proxmox instance. Sure, it's not their recommended method and might cause other issues, but I also don't want to hassle with nested virtualization or dedicated one of my physical servers to Ludus and Ludus alone.</p>
+<h5 id="built-on-debian">Built on Debian</h5>
+<p>On top of Ludus support, it's built on Debian. This means I can customize and harden it to my hearts desire.</p>
+<p>I've used Linux since I was 14, and it's the one operating system I'm most comfortable with. </p>
+<p>Knowing it's built on this gives me the confidence I need to run with it. I'll be able to apply all my standard security controls, troubleshoot, and get things back up and running in the event of downtime.</p>
+<h2 id="migration-post-mortem">Migration Post Mortem</h2>
+<p>Migration was alot easier than I thought it would be. Proxmox has added some good features anticipating a surge of new customers after the VMWare saga began.</p>
+<h3 id="migration-times">Migration Times</h3>
+<p>Migration took about 72-hours in total. This was largely because I did it in batches, if I did it all in one session it probably would have taken 12-hours or less for cloning all the VMs. In total I migrated around 30 VMs off of 4 separate VMWare hosts totalling over 8TB in used disk space.</p>
+<p>Much of the transfer time can be attributed to my miniature lab machines. These are the ones that are powered-on and operational 24/7 and run core services that my network could not operate without. </p>
+<p>These machines are HP ProDesk 600 G5 Minis which only have 1x1Gbe link. This is sufficient for daily use and while I do intend to upgrade these to something more modern and capable of MGig transfers, I'm happy with them for now.</p>
+<p>On my machines with 10Gig links, that was fairly fast. Those VMs (also some of the largest ones) migrated within 6 hours.</p>
+<h3 id="networking-pains">Networking Pains</h3>
+<p>The main pain after migration was the networking configuration on the VMs themself after migrating. </p>
+<p>I'm not sure if I selected the wrong option when migrating them, but the NIC Alias within the operating system changed on every single system.</p>
+<p>On my Windows boxes, it went from <code>Ethernet0</code>, to <code>Ethernet1</code>. </p>
+<p>On my Linux boxes, they went from <code>ens160</code> and <code>ens192</code> to <code>ens18</code> and <code>ens19</code>.</p>
+<p>This was <strong><em>painful</em></strong>. I initially just booted up these machines hoping things would work, only to discover I'd have to manually console into every single one and update the network interface configuration. </p>
+<p>This was most painful when it came to my Domain Controllers, as when I initially updated the adapter settings, I forgot to set the DNS. This took me about a week of intermittent issues and DNS resolution issues before I figured it out.</p>
+<p>Once I got everything moved over to the new aliases though, everything worked fine. Had I known before hand that it would do this, or of a way to prevent this, it would have went alot smoother.</p>
+<h3 id="the-import-process">The import Process</h3>
+<p>In Proxmox, migrating from VMWare is fairly simple. You just attach your ESXi instances, browse their inventory in the storage app, and click Import.</p>
+<figure>
+<figcaption>
+<p>Screenshot of process of adding ESXi Host as storage</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/vmware-migration/image-2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../../../images/vmware-migration/image-2.png" width="600" /></a></p>
+</figure>
+<p>I did have to manually export one VM. For some bizarre reason it would not import my Plex VM. I think it had something to do with mappings to passed-through PCIE devices. </p>
+<p>I did remove them from the VM config in VMWare, but it still gave errors after that and I instead just exported the VM and imported it manually.</p>
+<p>This import was as simple as copying the disks over to the proxmox host and attaching it to a new VM and booting things up for them to work perfectly.</p>
+<p>The whole process of that is:</p>
+<ul>
+<li>Export the VM from VMWare</li>
+<li>Copy the disks over to Proxmox</li>
+<li>Create a new VM in Proxmox and take note of the VMID</li>
+<li>
+<p>Import the disk and associate it with the new VM</p>
+<ul>
+<li>
+<p>For me this was as simple as</p>
+<p><code>qm disk import 121 Plex/BTLPLEX01-1.vmdk iscsi-vol1  --format vmdk</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Modify the configuration file of the VM to mount the disk</p>
+<ul>
+<li>
+<p>The config file would be located at: </p>
+<p><code>/etc/pve/nodes/&lt;node-name&gt;/qemu-server/&lt;vmid&gt;.conf</code></p>
+</li>
+<li>
+<p>You would see a line for "unused1", simply switch this to "scsi1" (or ide1/sata1 depending on your disk controller) and append the size.</p>
+</li>
+<li>Add scsi1 or ide1/sata1 to the boot order</li>
+<li>
+<p>Set scsi0 or ide0/sata0 to unused1 and remove the size</p>
+<p>Example from my lab:</p>
+<p><div class="highlight"><pre><span></span><code>boot: order=scsi1;ide2;net0
+cores: 4
+cpu: x86-64-v2-AES
+ide2: none,media=cdrom
+memory: 32768
+meta: creation-qemu=8.1.5,ctime=1732976942
+name: BTLPLEX01
+net0: virtio=BC:24:11:67:98:DD,bridge=vmbr1,mtu=9000,tag=10
+net1: virtio=BC:24:11:21:F1:69,bridge=vmbr1,mtu=9000,tag=900
+numa: 0
+ostype: l26
+scsi1: iscsi-vol1:vm-121-disk-1,size=175G
+scsihw: virtio-scsi-single
+smbios1: uuid=d01b1f98-1a58-4b31-8662-4a9f976a192f
+sockets: 1
+unused1: iscsi-vol1:vm-121-disk-0
+vmgenid: 2978ba0c-4eee-4d0a-b577-a3bbcb135ad0
+</code></pre></div>
+    <em>In case you're wondering, my Plex machine does not store the ISOs locally, they're mounted via a network share. Hence the only 175G drive (which is more than I really need)</em></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="id-like-to-see">I'd like to see:</h3>
+<p>Just a few things I'd like to see with Proxmox. Nothing that's a deal breaker or something I wouldn't recommend it over, they're more just nitpicking, personal preferences, and overall thoughts on the user experience.</p>
+<ul>
+<li><strong>SAML Support for Login</strong><ul>
+<li>I use Duo for access to all lab resources</li>
+<li>The trust relationship for SAML is not implicit, unlike OIDC.</li>
+<li>Permissions mapping for OIDC is also not great...Manually? Really?</li>
+<li>SAML is the defacto enterprise standard for SSO, just add support please.</li>
+</ul>
+</li>
+<li><strong>Importing from vCenter Inventory</strong><ul>
+<li>Rather than adding each individual ESXi host, add a vCenter server.</li>
+<li>This would be ideal for enterprises migrating over.</li>
+<li>Admittedly, this might already exist, I just didn't try it because it wasn't clear it was supported.</li>
+</ul>
+</li>
+<li><strong>A host-profile/compliance equivalent</strong><ul>
+<li>This was a feature I used heavily</li>
+<li>This would give the ability for us to quickly ensure that all hosts have matching configurations</li>
+</ul>
+</li>
+<li><strong>Standard tcp/443 for HTTPS</strong><ul>
+<li>Okay, this is more of a nitpick.</li>
+<li>I can't stand having to bookmark/type :8006 at the end of ever host URL</li>
+</ul>
+</li>
+<li><strong>A Simpler "Distributed Switch" alternative</strong><ul>
+<li>VMWare Distributed Switches are insanely easy to create and intuitive</li>
+<li>SDN seems like it can provide this functionality, but is not as clear or intuitive.</li>
+</ul>
+</li>
+</ul>
+<h3 id="overall-thoughts">Overall Thoughts</h3>
+<p>Overall, it was a <strong><em>relatively</em></strong> painless experience. The issues I dealt with were trivial, and likely my own doing.</p>
+<p>I would say for a large enterprise, this might be a little cumbersome and would definitely require some white-glove support or someone who can automate alot of this work.</p>
+<p>Clustering is working as expected, I didn't have any issues joining machines to a cluster and can centrally access all instances from any of the machines, which is a plus. No need for a dedicated vCenter management appliance that if I turn off, I'm stuck having to manually manage each instance. </p>
+<p>I will miss the host-profiles and distributed switching though. Not even touching on more advanced features, those were some of the ones I relied heavily on to simply things.</p>
+<p>I'm super excited to see Proxmox continue to adapt and get new features as organizations look for alternatives to VMWare. They've come a long way since I first started with them back in 2016.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

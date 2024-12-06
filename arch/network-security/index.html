@@ -1,0 +1,1687 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blueteamlabs.io/arch/network-security/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../virtualization/">
+      
+      
+      <link rel="icon" href="../../docs/assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Network Security - BLUE TEAM LABS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Arial";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#network-security" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="BLUE TEAM LABS" class="md-header__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BLUE TEAM LABS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Network Security
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="BLUE TEAM LABS" class="md-nav__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    BLUE TEAM LABS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to BLUE TEAM LABS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Lab Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Lab Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Devices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Capabilities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Assignments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Assignments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Physical Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlan-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      VLAN Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-routers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual Routers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual Routers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sandbox VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backbone-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backbone VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Zones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Zones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zone Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-dynamic-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Dynamic Lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-objects-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Objects and Groups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-objects-groups-and-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Objects, Groups, and Filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tags
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-profiles-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Profiles and Groups
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Profiles and Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antivirus-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antivirus Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-spyware-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anti-spyware Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vulnerability Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url-filtering-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      URL Filtering Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-blocking-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Blocking Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildfire-analysis-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wildfire Analysis Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-filtering-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Filtering Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dos-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      DOS Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-forwarding-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Forwarding Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decryption-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decryption Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Filters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../virtualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#devices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Devices
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-capabilities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance Capabilities
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#licenses" class="md-nav__link">
+    <span class="md-ellipsis">
+      Licenses
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#interface-assignments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Assignments
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Interface Assignments">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#physical-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      Physical Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vlan-interfaces" class="md-nav__link">
+    <span class="md-ellipsis">
+      VLAN Interfaces
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#virtual-routers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Virtual Routers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Virtual Routers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#internal-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Internal VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sandbox-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sandbox VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#backbone-vr-routes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Backbone VR Routes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-zones" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Zones
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Zones">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#zone-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Zone Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#basic-objects" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Objects
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Basic Objects">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#external-dynamic-lists" class="md-nav__link">
+    <span class="md-ellipsis">
+      External Dynamic Lists
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#address-objects-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address Objects and Groups
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-objects-groups-and-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Objects, Groups, and Filters
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tags
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-profiles-and-groups" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security Profiles and Groups
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security Profiles and Groups">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#antivirus-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Antivirus Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#anti-spyware-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Anti-spyware Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vulnerability-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vulnerability Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#url-filtering-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      URL Filtering Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-blocking-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Blocking Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wildfire-analysis-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wildfire Analysis Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-filtering-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data Filtering Profiles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dos-protection-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      DOS Protection Profiles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#authentication-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Authentication Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#log-forwarding-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Log Forwarding Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#decryption-profiles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Decryption Profiles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-filters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Filters
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="network-security">Network Security</h1>
+<p>I was originally going to name this just "Edge Security", but after thinking about it briefly, its more in-depth than that due to how it is configured. It is more than simply controlling network access at the edge, we also segment the network and control flow in between different VLANs/subnets.</p>
+<h2 id="devices">Devices</h2>
+<p>Edge security is provided by Palo Alto Networks NGFW. This is actually a remnant of a previous job I had, where I was responsible for designing, deploying, and maintaining a greenfield deployment of PANW firewalls. While working there, I invested in a PANW PA-440-LAB device for my homelab, and have maintained the licenses ever since.</p>
+<table>
+<thead>
+<tr>
+<th>Manufacturer</th>
+<th>Model</th>
+<th>Hostname</th>
+<th>Interfaces</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PANW</td>
+<td>PA-440-LAB</td>
+<td>gwof.core.blueteamlabs.io</td>
+<td>8 x Gbe</td>
+</tr>
+</tbody>
+</table>
+<h2 id="performance-capabilities">Performance Capabilities</h2>
+<p>The PA-440 is one of the entry level devices for PANW, despite this it offers competitive throughput for the price point, and when compared to other vendors at the same price point and featureset, stands out as a leader.</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firewall Throughput</td>
+<td>2.9/2.2Gbps</td>
+</tr>
+<tr>
+<td>Threat Prevention Throughput</td>
+<td>0.9/1.0 Gbps</td>
+</tr>
+<tr>
+<td>IPSec VPN Throughput</td>
+<td>1.7 Gbps</td>
+</tr>
+<tr>
+<td>Max Sessions</td>
+<td>200,000</td>
+</tr>
+<tr>
+<td>Max Sessions per Second</td>
+<td>37,000</td>
+</tr>
+</tbody>
+</table>
+<p>Full details are available via the <a href="https://www.paloaltonetworks.com/apps/pan/public/downloadResource?pagePath=/content/pan/en_US/resources/datasheets/pa-400-series-pan-os-10-2">PA-400 Series Datasheet</a></p>
+<h2 id="licenses">Licenses</h2>
+<p>Licenses for the LAB SKU of PANW devices are generally all encompassing, meaning that you get the full "enterprise" suite of licenses, which is extremely helpful for training with real-world features and complexity.</p>
+<p>The LAB SKU provides the following licenses:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Advanced DNS Security</td>
+<td>Adv DNS Sec Sub</td>
+</tr>
+<tr>
+<td>Advanced URL Filtering</td>
+<td>Adv URL Filtering Sub</td>
+</tr>
+<tr>
+<td>DNS Security</td>
+<td>Std DNS Sec Sub</td>
+</tr>
+<tr>
+<td>SD WAN</td>
+<td>License to enable SD-WAN</td>
+</tr>
+<tr>
+<td>Threat Prevention</td>
+<td>Std Threat Prev Sub</td>
+</tr>
+<tr>
+<td>WildFire License</td>
+<td>Std WildFire Sub</td>
+</tr>
+<tr>
+<td>Advanced Threat Protection</td>
+<td>Adv Threat Prot Sub</td>
+</tr>
+<tr>
+<td>Advanced WildFire License</td>
+<td>Access to Advanced WildFire signatures, logs, API</td>
+</tr>
+<tr>
+<td>GlobalProtect Gateway</td>
+<td>GlobalProtect Gateway License</td>
+</tr>
+<tr>
+<td>PAN-DB URL Filtering</td>
+<td>Palo Alto Networks URL Filtering License</td>
+</tr>
+<tr>
+<td>Standard</td>
+<td>10 x 5 phone support; repair and replace hardware service</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition info">
+<p class="admonition-title">Disclaimer on LAB SKUs and Obtaining PANW Devices</p>
+<p>In order to obtain any PANW device, you must have a registered business for which you are buying the device for. PANW does not let individuals purchase devices, software, or licenses. I do happen to do some consulting on the side, which I have a registered business for. <br><br>
+If you often work with PANW devices, it would be worth speaking with your sales rep to see if they can comp your org a LAB SKU device to have around as a sandbox. I have been able to obtain this at previous employers through VARs. Keep in mind if you are able to do this, the device would belong to your organization, and not you personally.<br><br>
+Lab SKU devices are intended only for labs, and using them in a production environment is a violation of PANWs ToS, and will get your subscriptions terminated along with potential legal actions.</p>
+</div>
+<h2 id="architecture">Architecture</h2>
+<p>The design of this network is intended to provide full scope visibility and control between segmented VLANS and subnets. While it does not nesecarilly provide full scope visibility into intra-VLAN/intra-subnet traffic, it has full visibility and control of traffic passing to other networks.</p>
+<p>This is accomplished using what some of you in the network world may know as "router on a stick", except in this situation, it's "firewall on a stick". The trunk link(s) to the core switch act as the default gateway for those subnets, ensuring that traffic must be routed through the firewall. </p>
+<p><a class="glightbox" href="../../images/diagrams/netsec_vr_assignment.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt text" src="../../images/diagrams/netsec_vr_assignment.png" /></a></p>
+<p>The above diagram depicts, as best possible, how the "firewall on a stick" is configured. As you can see, the VLANs are assigned on the firewall with an IP address that devices use as their default gateway. These interfaces are then created as sub interfaces for all interfaces that have devices connecting to these VLANs. This diagram also depicts something we'll go into later on, virtual routers.</p>
+<h2 id="interface-assignments">Interface Assignments</h2>
+<h3 id="physical-interfaces">Physical Interfaces</h3>
+<table>
+<thead>
+<tr>
+<th>Interface Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Tags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ethernet1/1</td>
+<td>Layer3</td>
+<td>Link to ATT ONT</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/2</td>
+<td>Layer3</td>
+<td>Link to TMobile 5G</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/3</td>
+<td>Layer2</td>
+<td>Link to virt01</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/3.1205</td>
+<td>Layer2</td>
+<td>VLAN1205 Subinterface</td>
+<td>Vlan1205</td>
+</tr>
+<tr>
+<td>ethernet1/3.1210</td>
+<td>Layer2</td>
+<td>VLAN1210 Subinterface</td>
+<td>Vlan1210</td>
+</tr>
+<tr>
+<td>ethernet1/3.1215</td>
+<td>Layer2</td>
+<td>VLAN1210 Subinterface</td>
+<td>Vlan1215</td>
+</tr>
+<tr>
+<td>ethernet1/4</td>
+<td>Layer2</td>
+<td>Link to virt02</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/4.1205</td>
+<td>Layer2</td>
+<td>VLAN1205 Subinterface</td>
+<td>Vlan1205</td>
+</tr>
+<tr>
+<td>ethernet1/4.1210</td>
+<td>Layer2</td>
+<td>VLAN1210 Subinterface</td>
+<td>Vlan1210</td>
+</tr>
+<tr>
+<td>ethernet1/4.1215</td>
+<td>Layer2</td>
+<td>VLAN1210 Subinterface</td>
+<td>Vlan1215</td>
+</tr>
+<tr>
+<td>ethernet1/5</td>
+<td>Aggregate Member</td>
+<td>AE Member to Core Switch</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/6</td>
+<td>Aggregate Member</td>
+<td>AE Member to Core Switch</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/7</td>
+<td>Disabled</td>
+<td>Unused</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ethernet1/8</td>
+<td>Layer2</td>
+<td>Link to Mgmt Port</td>
+<td>Vlan12</td>
+</tr>
+<tr>
+<td>ae1</td>
+<td>Layer2</td>
+<td>Agg Link to Core Switch</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>ae1.10</td>
+<td>Layer2</td>
+<td>VLAN10 Subinterface</td>
+<td>Vlan10</td>
+</tr>
+<tr>
+<td>ae1.12</td>
+<td>Layer2</td>
+<td>VLAN12 Subinterface</td>
+<td>Vlan12</td>
+</tr>
+<tr>
+<td>ae1.20</td>
+<td>Layer2</td>
+<td>VLAN20 Subinterface</td>
+<td>Vlan20</td>
+</tr>
+<tr>
+<td>ae1.40</td>
+<td>Layer2</td>
+<td>VLAN40 Subinterface</td>
+<td>Vlan40</td>
+</tr>
+<tr>
+<td>ae1.45</td>
+<td>Layer2</td>
+<td>VLAN45 Subinterface</td>
+<td>Vlan45</td>
+</tr>
+</tbody>
+</table>
+<h3 id="vlan-interfaces">VLAN Interfaces</h3>
+<table>
+<thead>
+<tr>
+<th>Interface Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vlan.10</td>
+<td>Layer3</td>
+<td>Server VLAN</td>
+<td>SrvVlan</td>
+</tr>
+<tr>
+<td>vlan.12</td>
+<td>Layer3</td>
+<td>Management VLAN</td>
+<td>MgmtVlan</td>
+</tr>
+<tr>
+<td>vlan.20</td>
+<td>Layer3</td>
+<td>User VLAN</td>
+<td>UserVlan</td>
+</tr>
+<tr>
+<td>vlan.40</td>
+<td>Layer3</td>
+<td>Guestnet VLAN</td>
+<td>GuestVlan</td>
+</tr>
+<tr>
+<td>vlan.45</td>
+<td>Layer3</td>
+<td>IoT VLAN</td>
+<td>IoTVlan</td>
+</tr>
+<tr>
+<td>vlan.1205</td>
+<td>Layer3</td>
+<td>DMZ VLAN</td>
+<td>DmzVlan</td>
+</tr>
+<tr>
+<td>vlan.1210</td>
+<td>Layer3</td>
+<td>Sandbox VLAN</td>
+<td>SandboxVlan</td>
+</tr>
+<tr>
+<td>vlan.1215</td>
+<td>Layer3</td>
+<td>Range VLAN</td>
+<td>RangeVlan</td>
+</tr>
+</tbody>
+</table>
+<p>There are also Loopback, Tunnel, and SD-WAN interfaces. However, these are not currently configured.</p>
+<h2 id="virtual-routers">Virtual Routers</h2>
+<p>Virtual routers can be used to implement logical separation. In Cisco-networking, we used to (been awhile) call these Virtual Route Forward (VRF) instances. They separate routing and forwarding tables, enabling great segmentation and allowing for the use of overlapping IP space. </p>
+<p>We currently utilize 3 Virtual Routers</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>internal</td>
+<td>VR for internal servers, mgmt, users, etc</td>
+</tr>
+<tr>
+<td>range</td>
+<td>VR for sandbox, DMZ, and range subnets</td>
+</tr>
+<tr>
+<td>backbone</td>
+<td>VR for internet connections</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-networking-admin/virtual-routers/virtual-router-overview">https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-networking-admin/virtual-routers/virtual-router-overview</a></p>
+<p>We specifically utilize them for a few purposes:</p>
+<ul>
+<li>Automatic failover of internet connections using PBR and "next-vr" routing.</li>
+<li>Segmentation of sandbox and trusted subnets using "drop" routing for subnets.</li>
+<li>Simplifying route management</li>
+</ul>
+<h3 id="internal-vr-routes">Internal VR Routes</h3>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Action</th>
+<th>Next Hop</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>172.16.120.0/24</td>
+<td>next-vr</td>
+<td>sandbox</td>
+<td>DMZ</td>
+</tr>
+<tr>
+<td>172.16.0.0/12</td>
+<td>drop</td>
+<td>N/A</td>
+<td>Drop Sandbox</td>
+</tr>
+<tr>
+<td>192.168.0.0/16</td>
+<td>drop</td>
+<td>N/A</td>
+<td>Drop Unused</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>next-vr</td>
+<td>backbone</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sandbox-vr-routes">Sandbox VR Routes</h3>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Action</th>
+<th>Next Hop</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10.13.37.0/27</td>
+<td>next-vr</td>
+<td>internal</td>
+<td>Servers</td>
+</tr>
+<tr>
+<td>10.0.0.0/8</td>
+<td>drop</td>
+<td>N/A</td>
+<td>Drop Internal</td>
+</tr>
+<tr>
+<td>192.168.0.0/16</td>
+<td>drop</td>
+<td>N/A</td>
+<td>Drop Unused</td>
+</tr>
+<tr>
+<td>0.0.0.0/0</td>
+<td>next-vr</td>
+<td>backbone</td>
+<td>Internet</td>
+</tr>
+</tbody>
+</table>
+<h3 id="backbone-vr-routes">Backbone VR Routes</h3>
+<table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Action</th>
+<th>Next Hop</th>
+<th>Desc</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>172.16.0.0/12</td>
+<td>next-vr</td>
+<td>sandbox</td>
+<td>Sandbox and DMZ</td>
+</tr>
+<tr>
+<td>10.0.0.0/8</td>
+<td>next-vr</td>
+<td>internal</td>
+<td>Internal</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition question">
+<p class="admonition-title">No Default Route</p>
+<p>You'll notice that theres no default route in the backbone VR. This is due to us using Policy Based Forwarding (PBF), which allows us to configure path monitoring and pre-emption for automated and fast failover when one connection goes down. We'll cover this more in depth in a separate section.</p>
+</div>
+<h2 id="security-zones">Security Zones</h2>
+<h3 id="zone-protection-profiles">Zone Protection Profiles</h3>
+<h2 id="basic-objects">Basic Objects</h2>
+<h3 id="external-dynamic-lists">External Dynamic Lists</h3>
+<p>There are several External Dynamic Lists (EDLs) in use. EDLs are essentially text files containing a list of entries that can be dynamically refreshed by the firewall, without the need to commit. This enables us to manage a list of dynamic addresses knowing they'll be automatically updated on the firewall without our intervention. Refresh intervals can be selected, ranging from 5-minutes to daily or weekly.</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Link</th>
+<th>Certificate Profile</th>
+<th>Usage</th>
+<th>Refresh Interval</th>
+<th>Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IoC Domains - BTL Gitlab Hosted EDL</td>
+<td>something</td>
+<td>CertProf-BTL-Chain</td>
+<td>BTL Managed list of IoCs to be blocked explicitly</td>
+<td>Every 5-minutes</td>
+<td>Dynamic Domain List</td>
+</tr>
+<tr>
+<td>IoC IPv4 - BTL Gitlab Hosted EDL</td>
+<td>something</td>
+<td>CertProf-BTL-Chain</td>
+<td>BTL Managed list of IoCs to be blocked explicitly</td>
+<td>Every 5-minutes</td>
+<td>Dynamic IP List</td>
+</tr>
+<tr>
+<td>IoC URLs - BTL Gitlab Hosted EDL</td>
+<td>something</td>
+<td>CertProf-BTL-Chain</td>
+<td>BTL Managed list of IoCs to belocked explicitly</td>
+<td>Every 5-minutes</td>
+<td>Dynamic URL List</td>
+</tr>
+<tr>
+<td>Microsoft 365 GCC - PANW Hosted EDL</td>
+<td>https://saasedl.paloaltonetworks.com/feeds/m365/usgovgcchigh/any/all/ipv4</td>
+<td>CertProf-Google-Trust-Chain</td>
+<td>bUsed to exempt GCC MS traffic from Decryption for Work</td>
+<td>Daily at 00:00</td>
+<td>Dynamic IP List</td>
+</tr>
+<tr>
+<td>Microsoft Azure GCC - PANW Hosted EDL</td>
+<td>https://saasedl.paloaltonetworks.com/feeds/azure/usgov/any/ipv4</td>
+<td>CertProf-Google-Trust-Chain</td>
+<td>Used to exempt GCC MS traffic from Decryption for Work</td>
+<td>Daily at 00:00</td>
+<td>Dynamic IP List</td>
+</tr>
+<tr>
+<td>Proton Services - BTL Gihub Hosted EDL</td>
+<td>https://raw.githubusercontent.com/blueteamboss/pan-edls/main/proton_AG-proton-mail-vpn-cal-etc</td>
+<td>CertProf-Google-Trust-Chain</td>
+<td>Used to exempt Proton Mail and related from decryption</td>
+<td>Daily at 00:00</td>
+<td>Dynamic IP List</td>
+</tr>
+</tbody>
+</table>
+<p>EDLs can be managed by going ton "Objects" --&gt; "External Dynamic Lists" and include types for:</p>
+<ul>
+<li>URLs</li>
+<li>Domains (FQDNs)</li>
+<li>IPv4 Addresses</li>
+<li>IPv6 Addresses</li>
+</ul>
+<p>One of the great things is that we can use Github, Gitlab, or whatever git service of our choice, which enables us to track changes and versioning just like we would want to do with code.</p>
+<h3 id="address-objects-and-groups">Address Objects and Groups</h3>
+<p>This section is not comprehensive and is intended too provide what the most important ones are used for.</p>
+<h3 id="application-objects-groups-and-filters">Application Objects, Groups, and Filters</h3>
+<p>This section is not comprehensive and is intended too provide what the most important ones are used for.</p>
+<h3 id="tags">Tags</h3>
+<p>This section is not comprehensive and is intended too provide what the most important ones are used for.</p>
+<h2 id="security-profiles-and-groups">Security Profiles and Groups</h2>
+<p>Security profiles are how we enable or disable threat protection profiles on a specific traffic flow. When we create Security Profiles, we can create groups so that our preferred settings are all stored in a central group that we can select instead of selecting them each individually.</p>
+<p>These groups are enabled per-security rule, which is useful in reducing overhead on specific traffic. For instance, a rule that explicitly denies traffic, wouldn't need a security profile for vulnerabilities, as the traffic is denied anyway. Security profiles can also help us gather packet captures for suspicious traffic, send alerts, and drop malicious activity.</p>
+<h3 id="antivirus-profiles">Antivirus Profiles</h3>
+<h3 id="anti-spyware-profiles">Anti-spyware Profiles</h3>
+<h3 id="vulnerability-protection-profiles">Vulnerability Protection Profiles</h3>
+<h3 id="url-filtering-profiles">URL Filtering Profiles</h3>
+<h3 id="file-blocking-profiles">File Blocking Profiles</h3>
+<h3 id="wildfire-analysis-profiles">Wildfire Analysis Profiles</h3>
+<h3 id="data-filtering-profiles">Data Filtering Profiles</h3>
+<h3 id="dos-protection-profiles">DOS Protection Profiles</h3>
+<h2 id="authentication-profiles">Authentication Profiles</h2>
+<h2 id="log-forwarding-profiles">Log Forwarding Profiles</h2>
+<h2 id="decryption-profiles">Decryption Profiles</h2>
+<h2 id="application-filters">Application Filters</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

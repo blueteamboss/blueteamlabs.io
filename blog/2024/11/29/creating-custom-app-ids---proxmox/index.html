@@ -1,0 +1,1090 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://blueteamlabs.io/blog/2024/11/29/creating-custom-app-ids---proxmox/">
+      
+      
+        <link rel="prev" href="../../20/lab-update---off-with-vmware/">
+      
+      
+        <link rel="next" href="../../../12/02/duo-sso-for-proxmox/">
+      
+      
+      <link rel="icon" href="../../../../../docs/assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.46">
+    
+    
+      
+        <title>Creating Custom App-IDs - Proxmox - BLUE TEAM LABS</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../../assets/stylesheets/main.6f8fc17f.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arial:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Arial";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="cyan">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creating-custom-app-ids-proxmox" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-header__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            BLUE TEAM LABS
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Creating Custom App-IDs - Proxmox
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../../.." title="BLUE TEAM LABS" class="md-nav__button md-logo" aria-label="BLUE TEAM LABS" data-md-component="logo">
+      
+  <img src="../../../../../docs/assets/btl_no_background.png" alt="logo">
+
+    </a>
+    BLUE TEAM LABS
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/blueteamboss/blueteamlabs.io" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to BLUE TEAM LABS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      <a href="../../../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Lab Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Lab Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Documentation Status
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/network-security/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Network Security
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../arch/virtualization/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Virtualization
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../resources/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../../about/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Me
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      The Objective
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#working-with-proxmox" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with Proxmox
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determining-how-to-match-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      Determining how to Match Traffic
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#inspecting-the-traffic-zed-attack-proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Inspecting the Traffic - Zed Attack Proxy
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Inspecting the Traffic - Zed Attack Proxy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-up-the-browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting up the Browser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up the Browser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installing-zap-ca-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installing ZAP CA (Optional)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#configuring-proxy-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuring Proxy Settings
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visiting-our-proxmox-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visiting our Proxmox Server
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#an-alternative-wireshark" class="md-nav__link">
+    <span class="md-ellipsis">
+      An Alternative: Wireshark
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-about-the-web-based-vnc-console-traffic" class="md-nav__link">
+    <span class="md-ellipsis">
+      What about the Web-based VNC Console traffic?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-the-proxmox-base-app-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating the "proxmox-base" App-ID
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating the "proxmox-base" App-ID">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration-tab-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Configuration" Tab Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#advanced-tap-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Advanced" Tap Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#signatures-tab-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      "Signatures" Tab Options
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label=""Signatures" Tab Options">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scope-transaction-vs-session" class="md-nav__link">
+    <span class="md-ellipsis">
+      Scope - Transaction vs Session
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ordered-condition-match" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ordered Condition Match
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#and-vs-or-conditions" class="md-nav__link">
+    <span class="md-ellipsis">
+      AND vs OR Conditions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testing-the-app-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      Testing the App-ID
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+  <div class="md-content md-content--post" data-md-component="content">
+    <div class="md-sidebar md-sidebar--post" data-md-component="sidebar" data-md-type="navigation">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner md-post">
+          <nav class="md-nav md-nav--primary">
+            <div class="md-post__back">
+              <div class="md-nav__title md-nav__container">
+                <a href="../../../../" class="md-nav__link">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+                  <span class="md-ellipsis">
+                    Back to index
+                  </span>
+                </a>
+              </div>
+            </div>
+            
+              <div class="md-post__authors md-typeset">
+                
+                  <div class="md-profile md-post__profile">
+                    <span class="md-author md-author--long">
+                      <img src="https://avatars.githubusercontent.com/u/151707434?v=4" alt="blueteamjames">
+                    </span>
+                    <span class="md-profile__description">
+                      <strong>
+                        
+                          blueteamjames
+                        
+                      </strong>
+                      <br>
+                      just a dude who likes security.
+                    </span>
+                  </div>
+                
+              </div>
+            
+            <ul class="md-post__meta md-nav__list">
+              <li class="md-nav__item md-nav__item--section">
+                <div class="md-post__title">
+                  <span class="md-ellipsis">
+                    Metadata
+                  </span>
+                </div>
+                <nav class="md-nav">
+                  <ul class="md-nav__list">
+                    <li class="md-nav__item">
+                      <div class="md-nav__link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 19H5V8h14m-3-7v2H8V1H6v2H5c-1.11 0-2 .89-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-1V1m-1 11h-5v5h5z"/></svg>
+                        <time datetime="2024-11-29 00:00:00+00:00" class="md-ellipsis">November 29, 2024</time>
+                      </div>
+                    </li>
+                    
+                    
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9 3v15h3V3zm3 2 4 13 3-1-4-13zM5 5v13h3V5zM3 19v2h18v-2z"/></svg>
+                          <span class="md-ellipsis">
+                            in
+                            
+                              <a href="../../../../category/palo-alto/">Palo-Alto</a>, 
+                              <a href="../../../../category/app-id/">App-ID</a>, 
+                              <a href="../../../../category/ngfw/">NGFW</a>, 
+                              <a href="../../../../category/layer-7-filtering/">Layer-7 Filtering</a></span>
+                        </div>
+                      </li>
+                    
+                    
+                      
+                      <li class="md-nav__item">
+                        <div class="md-nav__link">
+                          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7z"/></svg>
+                          <span class="md-ellipsis">
+                            
+                              14 min read
+                            
+                          </span>
+                        </div>
+                      </li>
+                    
+                  </ul>
+                </nav>
+              </li>
+            </ul>
+          </nav>
+          
+        </div>
+      </div>
+    </div>
+    <article class="md-content__inner md-typeset">
+      
+        
+
+  
+  
+
+
+<h1 id="creating-custom-app-ids-proxmox">Creating Custom App-IDs - Proxmox</h1>
+<p>If you've ever administered a firewall with advanced inspection features, you're probably all too familiar with specific applications being decoded as basic ones like SSL or Web browsing. This highlights the complex relationship we as administrators have with nearly all internet-traffic being encrypted. While we're happy we've adopted encryption, it also thwarts some of our inspection capabilities. </p>
+<p>Thankfully, we're an enterprise, and we've gone ahead and setup SSL decryption. Now 80% of our traffic is decoded properly and inspected with appropriate security filters. What about the other 20%?</p>
+<p>The world is less than perfect, which means that companies like Palo Alto, Fortinet, Cisco, and others can't create app-decoders for every application out there. Some are sparingly used, custom, or just don't have anything unique to identify them with. Fear not though, for we have the power. The power to create custom App-IDs.</p>
+<!-- more -->
+<h2 id="the-objective">The Objective</h2>
+<p>This is a series on custom App-IDs, and how to create them. In this episode, we cover my utilization of Custom App-IDs to decode Proxmox traffic. I recently switched to Proxmox after Broadcom, in their infinite wisdom, began gatekeeping access to eval experience licenses for VMWare User Group members. Previously, I could get 365-day eval licenses for the full VMWare suite, which was fantastic for labbing things out and learning. In their never ending quest to expand profits though, VMWare locked this behind certifications. That's right, in order to learn how to administer their platforms, you have to get a certification to get access to their platform to learn it. </p>
+<p>That's okay, Proxmox has come a long way.</p>
+<h2 id="working-with-proxmox">Working with Proxmox</h2>
+<p>Similar to VMWare, Proxmox is administered via a web-interface. Proxmox is built on Linux, Debian to be specific, and looks like any generic web application. Palo Alto does not have app decoders yet, though I'm confident they will in the near future as enterprises look to alternatives for VMWare given the rumblings 2-3x price increases even for the largest of consumers.</p>
+<p>Proxmox uses the following ports for web access:</p>
+<ul>
+<li><code>tcp/8006</code> - SSL Encrypted Web Traffic</li>
+<li><code>tcp/5000-5999</code> - Websockets (VNC Web Console)</li>
+</ul>
+<h2 id="determining-how-to-match-traffic">Determining how to Match Traffic</h2>
+<p>Okay, so we know how to access our Proxmox server, but what makes it uniquely identifiable as Proxmox traffic itself. Certainly, we could match based off of domains or request URIs, but that's not easily portable to new deployments of Proxmox. If we create a decoder specific to Server Name Identifiers (SNI) or request URIs, we'd have to update that every-time we provision a new Proxmox server. We don't want that. We want it to be able to decode the traffic regardless of the SNI, Domain, or  URI. We want anyone to be able to pick this app decoder up, import it into their firewall, and have it properly decode traffic as Proxmox.</p>
+<p>For this, we're going to need to take a look at:</p>
+<ul>
+<li>HTTP Request Headers</li>
+<li>HTTP Response Headers</li>
+<li>Websockets Request Contexts</li>
+</ul>
+<p>Now, we're not always going to be able to decode traffic using these. Sometimes, there won't be any unique headers or contexts, which might prevent us from decoding altoghether unless we do it based on something like SNI, Domain, or URI. While the later might be okay for SaaS applications whose resources are well known, it doesn't for something like Proxmox.</p>
+<h2 id="inspecting-the-traffic-zed-attack-proxy">Inspecting the Traffic - Zed Attack Proxy</h2>
+<p>For this, we're going to be using Zed Attack Proxy (zaproxy) for interecepting the web traffic and inspecting the headers. While we could use our browsers developer console, Wireshark, HAR logs, or other tools, I personally find ZAP easier to navigate and find what I need to within seconds.</p>
+<figure>
+<figcaption>
+<p><code>btw, i use arch.</code></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="alt-text" src="../../../../images/pve-app-id/image.png" /></a></p>
+</figure>
+<p>I'll be installing this via the 'extra' repo on Arch:
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>pacman<span class="w"> </span>-Sy<span class="w"> </span>zaproxy
+</code></pre></div></p>
+<p>If you're using a lesser distro, you can find out how to install ZAP on your distro below, or alternatively install Arch and be part of the meme:</p>
+<ul>
+<li><a href="https://software.opensuse.org/download.html?project=home%3Acabelo&amp;package=zap">ZAP Install Guides</a></li>
+<li><a href="https://wiki.archlinux.org/title/Installation_guide">Install Arch</a></li>
+</ul>
+<h3 id="setting-up-the-browser">Setting up the Browser</h3>
+<p>With ZAP installed, go ahead and run it. This can usually be done by just opening a terminal and running <code class="highlight">zaproxy</code>. ZAP is unfortunately an Java application, but despite the slowness and my hate for Java we will push through.</p>
+<p>The first thing you'll want to do is go over to your browser and visit the local ZAP proxy to download the CA. This is optional, but prevents us from getting certificate warnings when we're working with Proxmox. That is assuming you've already installed a certificate from a trusted issuer on Proxmox. </p>
+<p>After we do that, we'll have to change the proxy settings in our browser. For this demonstration, I'm using Firefox--it's easier to work with Proxies on and can do so independently of system proxy settings.</p>
+<h4 id="installing-zap-ca-optional">Installing ZAP CA (Optional)</h4>
+<p>In your web browser, visit <code>localhost:8080</code>, this is the default port for ZAP. This will open a page where you can download the CA Certificate and install it into your browsers trusted store.</p>
+<details class="warning" open="open">
+<summary>Optional</summary>
+<p>This section for installing the ZAP CA in our browsers trusted store is completely optional. If you're okay with dealing with browser warnings, skip ahead to <a href="#configuring-proxy-settings">Configuring Proxy Settings</a></p>
+</details>
+<figure>
+<figcaption>
+<p>To download the CA certificate, click the link for <strong>"download"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-1.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of ZAP Index" src="../../../../images/pve-app-id/image-1.png" /></a></p>
+</figure>
+<p>Next, we'll need to head over to our browsers trust chain manager and import this certificate. </p>
+<figure>
+<figcaption>
+<p>Go to <code>about:settings#privacy</code> in your URL bar and scroll down until you see the <strong>"Certificates"</strong> section. Here, click <strong>"View Certificates"</strong> to open up the dialog for importing CA chains.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/view-certificates-firefox.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Trust Configuration Screenshot" src="../../../../images/pve-app-id/view-certificates-firefox.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>Next, go to the "Authorities" tab and click the <strong>"Import"</strong> button.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/import-certificates-firefox.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Trust Configuration Screenshot" src="../../../../images/pve-app-id/import-certificates-firefox.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>You'll be met with a normal file dialog. Locate the certificate we downloaded earlier and click open.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/open-cert.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Trust Configuration Screenshot" src="../../../../images/pve-app-id/open-cert.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>In the pop-up, select <strong>"Trust this CA to identify websites"</strong> and click <strong>"OK"</strong>. This just determines what Firefox allows this CA to be used for.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/firefox-ca-options.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Trust Configuration Screenshot" src="../../../../images/pve-app-id/firefox-ca-options.png" width="600" /></a></p>
+</figure>
+<h4 id="configuring-proxy-settings">Configuring Proxy Settings</h4>
+<figure>
+<figcaption>
+<p>Navigate to <code>about:setting</code> in our web browser. Search for "Proxy" in the search bar. Open the "settings" button.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/proxy-settings.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Proxy Settings Screenshot" src="../../../../images/pve-app-id/proxy-settings.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>In the dialog, select <strong>"Manual Proxy Configuration"</strong> and enter <strong>"localhost"</strong> in the HTTP Proxy field, with the port <strong>"8080"</strong>. Next, select <strong>"Also use this proxy for HTTPS"</strong>. Click <strong>"OK"</strong> to close</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/proxy-settings-2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Mozilla Firefox Proxy Settings Screenshot" src="../../../../images/pve-app-id/proxy-settings-2.png" width="600" /></a></p>
+</figure>
+<h3 id="visiting-our-proxmox-server">Visiting our Proxmox Server</h3>
+<p>Next up, we'll want to visit our Proxmox server. This is obviously self explanatory. This also doesn't have to be Proxmox you're visiting, just something you're looking to build a decoder for or learn more about what the traffic looks like under the hood.</p>
+<figure>
+<figcaption>
+<p>For this, I'll be visiting one of four servers in my Proxmox cluster, <code>https://virt02.core.blueteamlabs.io:8006</code>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-3.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Proxmox Login Page" src="../../../../images/pve-app-id/image-3.png" width="600" /></a></p>
+</figure>
+<details class="note">
+<summary>What are those elements</summary>
+<p>This is a beautiful feature of ZAP, where it allows you to interact directly within the browser and learn about some of the interesting alerts it's already identified (things like information disclosure alerts and more). We won't be using this.</p>
+</details>
+<p>Before logging in, I want to go over to my ZAP GUI and take a look at things now that the web-page has loaded.</p>
+<p>First, let's expand the <strong>"Sites"</strong> section, and locate the first request. Here we'll see an HTTP GET request for <code>:/</code>. This will be pretty common. </p>
+<p>Click on the <code>GET:/</code> entry and head over to the <strong>"Response"</strong> tab. For those unfamiliar with HTTP responses, once a client has requested a resource, the server responds with information like headers, status codes, server data, and security information. </p>
+<p>When we're looking at the response, we're focused on headers. While we technically can inspect the actually payload (e.g. body), we should avoid this unless absolutely neseccary. Although PANW has good performance due to it's single-pass filtering, it can induce latency if we're inspecting millions of packets to extract a specific value from within the response payload. Headers are more efficient, as long as they're unique enough.</p>
+<p>In the headers we'll be looking for a couple of interesting things.</p>
+<ul>
+<li>The <code>server</code> header</li>
+<li>Any interesting entries in the <code>Access-Control-Allow-Headers</code> </li>
+<li>Any custom headers specific to that application (e.g. <code>X-&lt;app-name&gt;</code>)</li>
+</ul>
+<p>Depending on the application and what headers it provides, there's endless options for us to go off of. In most of those scenarios, you'd only know by taking a look at the headers. To be clear, in most web-browsers this is already accessible and can be accessed without ZAP, but ZAP just makes it easier to find.</p>
+<figure>
+<figcaption>
+<p>Reviewing the response headers from our <code>GET:/</code> request, we can see something interesting already. The <code>server</code> header is reported as <code>pve-api-daemon/3.0</code>. This is good, we can already uniquely identify this without going too much further.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/proxmox-get-headers.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of ZAP GET Response Headers" src="../../../../images/pve-app-id/proxmox-get-headers.png" width="700" /></a></p>
+</figure>
+<p>Quickly reviewing some of the other <code>GET</code> requests for different paths on the Proxmox server, we can see this header is consistently used and is something we can rely on.</p>
+<details class="success">
+<summary>Recap</summary>
+<p>We were able to extract a response header we can use to identify this traffic, that being the <code>Server: pve-api-daemon/3.0</code> value.</p>
+<p>Additionally, we know that Proxmox web traffic occurs over <code>tcp/8006</code>. Since we are looking at response headers for an encrypted session, we also know we'll need to decrypt this traffic. This is important. </p>
+</details>
+<h2 id="an-alternative-wireshark">An Alternative: Wireshark</h2>
+<p>Maybe you're a packet junky and prefer analyzing traffic in Wireshark. This is relatively simple. To do this we just need to set an environmental variable and launch our Web Browser. Once we've got that done we can visit the page while capturing the traffic in Wireshark.</p>
+<p>On Linux, set the <code>SSLKEYLOGFILE</code> in your shell profile (.bash_profile, .zshrc, etc). The pre-master secrets we need to decrypt the traffic will be logged to this file. Due to some oddities in my system, even though I'm using zsh as my main shell, I still need this set in my .bashrc file.</p>
+<details class="danger" open="open">
+<summary>Danger</summary>
+<p>I would highly recommend deleting this log file (perhaps wiping it multiple times over) and removing this from your .bashrc when you're done. Anyone whose intercepted your traffic and stored it to decrypt later could potentially abuse this log file.</p>
+</details>
+<figure>
+<figcaption>
+<p>Set the environmental variable by adding it to your shell init script or setting it for your current session
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSLKEYLOGFILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$HOME</span><span class="s2">/.ssl-key.log&quot;</span>
+</code></pre></div></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-6.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of .bashrc file" src="../../../../images/pve-app-id/image-6.png" width="600" /></a></p>
+</figure>
+<p>This is the same environmental variable in Windows, so you can go ahead and set it up via the GUI in Windows if you're into that sort of thing.</p>
+<p>Next, we'll open up a two new terminal sessions, verify the environmental variable is set properly, and launch our web-browser of choice and monitor the log file to ensure entries are being added when we visit a web-page.</p>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>At this point you need to Open wireshark and start listening for traffic if you haven't already. For the purposes of this demo, I've already launched Wireshark and am capturing traffic.</p>
+</details>
+<figure>
+<figcaption>
+<p>In the first terminal window, echo out the variable we set to make sure it's set correctly, then launch your web-browser if everything checks out.
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$SSLKEYLOGFILE</span>
+</code></pre></div></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-5.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Linux terminal" src="../../../../images/pve-app-id/image-5.png" width="600" /></a></p>
+</figure>
+<figure>
+<figcaption>
+<p>In the second terminal window, tail the log file to ensure it's populating properly after visiting a site. Chances are your web-browser communicated to some telemetry sites automatically and has already logged those secrets.
+<div class="highlight"><pre><span></span><code>tail<span class="w"> </span>-f<span class="w"> </span><span class="nv">$SSLKEYLOGFILE</span><span class="err">&#39;</span>
+</code></pre></div></p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/ssl_log_file.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Linux terminal" src="../../../../images/pve-app-id/ssl_log_file.png" width="600" /></a></p>
+</figure>
+<p>Next, go to the <strong>"Edit"</strong> menu in Wireshark, and select <strong>"Edit Preferences"</strong>. You can alternatively press <span class="keys"><kbd class="key-control">Ctrl</kbd><span>+</span><kbd class="key-shift">Shift</kbd><span>+</span><kbd class="key-p">P</kbd></span></p>
+<figure>
+<figcaption>
+<p>Navigate to <strong>"Protocols"</strong> and scroll all the way down to <strong>"TLS"</strong>. Not the most user friendly, but let's just be glad something like Wireshark is free and exists.</p>
+<p>In the "(Pre)-Master-Secret log filename" field, enter the path to the log file we set earlier.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/tls_key_logs.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Wireshark TLS Keys Setup" src="../../../../images/pve-app-id/tls_key_logs.png" width="600" /></a></p>
+</figure>
+<details class="success" open="open">
+<summary>Happy Hunting!</summary>
+<p>And just like that, you should start seeing TLS traffic being analyzed as "HTTP" once the handshake is complete. Happy hunting, you'll find everything we did with ZAP.
+<a class="glightbox" href="../../../../images/pve-app-id/image-7.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Wireshark" src="../../../../images/pve-app-id/image-7.png" width="width" /></a></p>
+</details>
+<h2 id="what-about-the-web-based-vnc-console-traffic">What about the Web-based VNC Console traffic?</h2>
+<p>While I did initially look down this path, and did have some minor success, I wasn't able to consistently decode the console traffic, and therefore will skip it in this post. I did spend way more time than I'm comfortable admitting, only for it not to work. Such is life.</p>
+<h2 id="creating-the-proxmox-base-app-id">Creating the "proxmox-base" App-ID</h2>
+<p>Okay, so we've got everything we need to identify the traffic, now we need to create the App-ID.</p>
+<details class="note" open="open">
+<summary>Note</summary>
+<p>This section assumes we've already got Decryption in place between our workstation and the Proxmox servers on tcp/8006. That's a simple thing to do, and I won't go into it here to keep this shorter.</p>
+</details>
+<figure>
+<figcaption>
+<p>On our Palo, we'll head over to the "Objects" tab and go to "Application". Click "Add".</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/pan_apps_page-2.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img align="left" alt="Screenshot of Applications Page" src="../../../../images/pve-app-id/pan_apps_page-2.png" width="600" /></a></p>
+</figure>
+<p>We will be creating the "proxmox-base" App-ID, this will match the general web traffic for administering the Proxmox cluster.</p>
+<h4 id="configuration-tab-options">"Configuration" Tab Options</h4>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Name</strong></td>
+<td>proxmox-base</td>
+</tr>
+<tr>
+<td><strong>Description</strong></td>
+<td>Proxmox Virtual Environment (Proxmox VE or PVE) is a virtualization platform designed for the provisioning of hyper-converged infrastructure.</td>
+</tr>
+<tr>
+<td><strong>Category</strong></td>
+<td>networking</td>
+</tr>
+<tr>
+<td><strong>Subcategory</strong></td>
+<td>it-infrastructure</td>
+</tr>
+<tr>
+<td><strong>Technology</strong></td>
+<td>browser-based</td>
+</tr>
+</tbody>
+</table>
+<p>Under the "Characteristics" section, we'll select the following:</p>
+<ul>
+<li>Capable of File Transfer</li>
+<li>Excessive Bandwidth Use</li>
+<li>Continue scanning for other applications</li>
+</ul>
+<details class="note" open="open">
+<summary>Note</summary>
+<p><del>The last item there is important since our intent is to create secondary App-IDs to match the VNC web console. This enables us to do that, and does exactly what it sounds like.</del></p>
+<p>This would have been important, but I still haven't got the App-ID for proxmox-web-vnc working reliably. It'll probably come to me in a eureka moment as I'm struggling to fall asleep after staring at the ceiling for the past 4-hours.</p>
+</details>
+<figure>
+<figcaption>
+<p>First, enter all the values in the "Configuration" tab. When that's done, head on over to the "Advanced" tab.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/app_config_page.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of &quot;Configuration&quot; tab of Custom App-ID" src="../../../../images/pve-app-id/app_config_page.png" width="600" /></a></p>
+</figure>
+<h4 id="advanced-tap-options">"Advanced" Tap Options</h4>
+<p>For our configurations here, we're going to set the default port that Proxmox web traffic uses. This is simple, <code>tcp/8006</code>.</p>
+<figure>
+<figcaption>
+<p>Under "Defaults", select "Port" and add the entry <code>tcp/8006</code>. When done, meander over to the "Signatures" tab.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/app_adv_page.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of &quot;Advanced&quot; tab of Custom App-ID" src="../../../../images/pve-app-id/app_adv_page.png" width="600" /></a></p>
+</figure>
+<h4 id="signatures-tab-options">"Signatures" Tab Options</h4>
+<p>Everything up to this point was pretty self explanatory. Thankfully, I never personally guaranteed this would always be the case.</p>
+<p>Signatures are how we actually match request, response, and payload patterns or values. We can have multiple signatures per App-ID, which might be used to delineate different versions or highly complex signatures that have multiple logical requirements best separated out.</p>
+<p>Click the "Add" button to add a new Signature. We'll be calling ours "proxmox-http-rsp-head". Under the comment, put whatever floats your boat. I put "Matches the response header for Server: pve-api-daemon/3.0".</p>
+<figure>
+<figcaption>
+<p>I'd like to just interject for a moment. What you're referring to as PAN, is actual PANW, or as Nir would like us to call them, Palo Alto Networks</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-12.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Image of RMS Interjecting into the conversation" src="../../../../images/pve-app-id/image-12.png" width="600" /></a></p>
+</figure>
+<h5 id="scope-transaction-vs-session">Scope - Transaction vs Session</h5>
+<p>When we set our scope to "Transaction", we're matching each singular transaction. This is useful when we want to match specific actions within an application that might be distinct. For instance, say we wanted to match youtube-uploading as one application, and youtube-base as another.</p>
+<p>When set to "Session", it matches behavior across the entire session. This is useful when we can't uniquely identify an application based off of one transaction. This might be applications that require a full handshake to complete, along with multiple messages to be sent back and forth.</p>
+<h5 id="ordered-condition-match">Ordered Condition Match</h5>
+<p>This is relatively easy to understand, if set, this requires that traffic match in the specific order configured in. For instance if you require a specific request URI and a specific header or payload value, they would match in the order you put them in. If disable, it matches in any order.</p>
+<h5 id="and-vs-or-conditions">AND vs OR Conditions</h5>
+<p>If we create an OR condition, then we only need to match one of the entries in the OR condition. For instance if you say the traffic must match "video.youtube.com" OR have a header of "Server: gts", if either of those is true, the signature will return true.</p>
+<p>For an AND condition, it would require that all conditions within that AND condition match.</p>
+<h3 id="_1"></h3>
+<p>For our use case, we're going to leave these at "Transaction" for Scope and "Ordered Condition Match" set to enabled. Since we really only need to look for one value thanks to Proxmox persisting the correct server header across responses, we don't need anything too advanced at the moment.</p>
+<figure>
+<figcaption>
+<p>Enter the Name and comment, and click "Add And Condition".</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/sig-http-rsp-head.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of PANW App-ID Signature" src="../../../../images/pve-app-id/sig-http-rsp-head.png" width="600" /></a></p>
+</figure>
+<p>For us, we're going to use "Pattern Match" as the operator, which would allow us to match regular expressions and strings. If we had an integer value we were looking for, we could use less-than, greater-than, or equal-to.</p>
+<p>For context, we'll be using the "http-rsp-headers"</p>
+<p>For the pattern, we can use one of the following patterns:
+<div class="highlight"><pre><span></span><code>Server: pve-api-daemon/3.0 
+
+Server: pve-api-daemon/(\d+\.\d+)
+</code></pre></div>
+I'm electing to use the regex pattern, as this will allow us to account for future updates to Proxmox that might change the API version.</p>
+<figure>
+<figcaption>
+<p>Set <strong>"Operator"</strong> to <strong>"Pattern Match"</strong></p>
+<p><strong>"Context"</strong> to <strong>"http-rsp-headers"</strong></p>
+<p><strong>"Pattern"</strong> to <code>Server: pve-api-daemon/(\d+\.\d+)</code> </p>
+<p>Click <strong>"OK"</strong>.</p>
+</figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-10.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of PANW App-ID Signature Pattern" src="../../../../images/pve-app-id/image-10.png" width="600" /></a></p>
+</figure>
+<p>Click <strong>"OK"</strong> again to close the application signature. Next, click <strong>"OK"</strong> again to close the application object we're creating. Finally, click <strong>"Commit"</strong></p>
+<details class="note">
+<summary>Seriously, PANW?</summary>
+<p>Okay, I've got a bone to pick. While I still love PANW appliances, I cannot stand how many buttons you have to click in the interface, and it's just as bad to use the CLI where you have to continue question-mark or tab things because I don't have a perfect memory. Please make this simpler. Stop with the pop-ups and separate dialogs. Find a better way.</p>
+</details>
+<h2 id="testing-the-app-id">Testing the App-ID</h2>
+<p>Now, that we've got our changes committed, let's head on over to the "Monitor" tab and see if we can see our new App-ID in action when we visit Proxmox.</p>
+<details class="success" open="open">
+<summary>Success</summary>
+<p>By searching for traffic to our PVE server, we can see that prior to this change, the app was being seen as "web-browsing", but now that the change has been committed, it's being seen as "proxmox-base". For once I did something right.</p>
+</details>
+<p><a class="glightbox" href="../../../../images/pve-app-id/proxmox-monitor-tab.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Screenshot of Montior tab showing new Proxmox App-ID in use." src="../../../../images/pve-app-id/proxmox-monitor-tab.png" /></a></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>There's alot we can do with App-IDs, to simply monitoring what applications are actually traversing our network, to enabling advanced inspection like data patterns, viruses, and file types. They're a preferable alternative to Application Overrides, and are sometimes neseccary. </p>
+<p>In my experience, Custom App-IDs are used sparingly. That's mostly because everyone sees the effort involved in decrypting traffic and says no thanks. I don't blame them, it's a constant headache. PANW is also very good about adding new decoders periodically, and tests them heavily before deployment--though CrowdStrike said the same thing before we all got CrowdStruck. </p>
+<figure>
+<figcaption></figcaption>
+<p><a class="glightbox" href="../../../../images/pve-app-id/image-13.png" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="Another bad meme..." src="../../../../images/pve-app-id/image-13.png" width="600" /></a></p>
+</figure>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+  
+
+
+
+      
+    </article>
+  </div>
+
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../../../..", "features": [], "search": "../../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
