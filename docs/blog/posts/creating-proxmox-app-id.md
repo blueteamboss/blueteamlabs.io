@@ -207,7 +207,7 @@ In the "(Pre)-Master-Secret log filename" field, enter the path to the log file 
 
 ???+success "Happy Hunting!"
     And just like that, you should start seeing TLS traffic being analyzed as "HTTP" once the handshake is complete. Happy hunting, you'll find everything we did with ZAP.
-    ![Screenshot of Wireshark](image-7.png){ width =600}
+    ![Screenshot of Wireshark](../images/pve-app-id/image-7.png){ width =600}
 
 
 ## What about the Web-based VNC Console traffic?
