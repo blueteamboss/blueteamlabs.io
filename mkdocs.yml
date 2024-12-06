@@ -39,7 +39,6 @@ markdown_extensions:
       prepend: true
 plugins:
   - blog:
-      authors_profiles: false
       blog_toc: true
       pagination: true
       post_excerpt: required
