@@ -91,7 +91,7 @@ The above diagram depicts, as best possible, how the "firewall on a stick" is co
 | vlan.20 | Layer3 | User VLAN | UserVlan | 
 | vlan.40 | Layer3 | Guestnet VLAN | GuestVlan |
 | vlan.45 | Layer3 | IoT VLAN | IoTVlan |
-| vlan.1205 | Layer3 | DMZ VLAN | DmzVlan |
+| vlan.1205 | Layer3 | Range Uplink VLAN | RangeVlan |
 | vlan.1210 | Layer3 | Sandbox VLAN | SandboxVlan |
 | vlan.1215 | Layer3 | Range VLAN | RangeVlan |
 
@@ -105,7 +105,7 @@ We currently utilize 3 Virtual Routers
 | Name | Use |
 | ---- | --- |
 | internal | VR for internal servers, mgmt, users, etc | 
-| range | VR for sandbox, DMZ, and range subnets |
+| range | VR for sandbox, honeynet, and range subnets |
 | backbone | VR for internet connections |
 
 [https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-networking-admin/virtual-routers/virtual-router-overview](https://docs.paloaltonetworks.com/pan-os/10-1/pan-os-networking-admin/virtual-routers/virtual-router-overview)
@@ -119,7 +119,7 @@ We specifically utilize them for a few purposes:
 ### Internal VR Routes
 | Route | Action | Next Hop | Desc | 
 | ----- | ------ | -------- | ---- | 
-| 172.16.120.0/24 | next-vr | sandbox | DMZ | 
+| 172.16.120.0/24 | next-vr | sandbox | Range | 
 | 172.16.0.0/12 | drop | N/A | Drop Sandbox | 
 | 192.168.0.0/16 | drop | N/A | Drop Unused |
 | 0.0.0.0/0 | next-vr | backbone | Internet |
@@ -136,7 +136,7 @@ We specifically utilize them for a few purposes:
 ### Backbone VR Routes
 | Route | Action | Next Hop | Desc |
 | ----- | ------ | -------- | ---- |
-| 172.16.0.0/12 | next-vr | sandbox | Sandbox and DMZ |
+| 172.16.0.0/12 | next-vr | sandbox | Sandbox and Range |
 | 10.0.0.0/8 | next-vr | internal | Internal |
 
 !!! Question "No Default Route"
